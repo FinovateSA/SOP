@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude at Finovate — Using Claude</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%3E%0A%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2226%22%20fill%3D%22%23202658%22%2F%3E%0A%3Cg%20fill%3D%22%2300d683%22%3E%0A%3Cg%3E%3Crect%20x%3D%2243%22%20y%3D%226%22%20width%3D%2214%22%20height%3D%2222%22%20rx%3D%225%22%2F%3E%3C%2Fg%3E%0A%3Cg%20transform%3D%22rotate%2845%2050%2050%29%22%3E%3Crect%20x%3D%2243%22%20y%3D%226%22%20width%3D%2214%22%20height%3D%2222%22%20rx%3D%225%22%2F%3E%3C%2Fg%3E%0A%3Cg%20transform%3D%22rotate%2890%2050%2050%29%22%3E%3Crect%20x%3D%2243%22%20y%3D%226%22%20width%3D%2214%22%20height%3D%2222%22%20rx%3D%225%22%2F%3E%3C%2Fg%3E%0A%3Cg%20transform%3D%22rotate%28135%2050%2050%29%22%3E%3Crect%20x%3D%2243%22%20y%3D%226%22%20width%3D%2214%22%20height%3D%2222%22%20rx%3D%225%22%2F%3E%3C%2Fg%3E%0A%3Cg%20transform%3D%22rotate%28180%2050%2050%29%22%3E%3Crect%20x%3D%2243%22%20y%3D%226%22%20width%3D%2214%22%20height%3D%2222%22%20rx%3D%225%22%2F%3E%3C%2Fg%3E%0A%3Cg%20transform%3D%22rotate%28225%2050%2050%29%22%3E%3Crect%20x%3D%2243%22%20y%3D%226%22%20width%3D%2214%22%20height%3D%2222%22%20rx%3D%225%22%2F%3E%3C%2Fg%3E%0A%3Cg%20transform%3D%22rotate%28270%2050%2050%29%22%3E%3Crect%20x%3D%2243%22%20y%3D%226%22%20width%3D%2214%22%20height%3D%2222%22%20rx%3D%225%22%2F%3E%3C%2Fg%3E%0A%3Cg%20transform%3D%22rotate%28315%2050%2050%29%22%3E%3Crect%20x%3D%2243%22%20y%3D%226%22%20width%3D%2214%22%20height%3D%2222%22%20rx%3D%225%22%2F%3E%3C%2Fg%3E%0A%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2224%22%2F%3E%0A%3C%2Fg%3E%0A%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2210%22%20fill%3D%22%23202658%22%2F%3E%0A%3C%2Fsvg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#202658;
+    --navy-deep:#191d44;
+    --navy-soft:#2c326a;
+    --green:#00d683;
+    --green-deep:#00b46e;
+    --teal:#16846b;
+    --mist:#7f8bb0;
+    --bg:#f4f6fa;
+    --bg-2:#eaeef5;
+    --card:#ffffff;
+    --ink:#202658;
+    --text:#343a55;
+    --text-soft:#6a7090;
+    --line:rgba(32,38,88,.12);
+    --line-strong:rgba(32,38,88,.26);
+    --shadow:0 1px 0 rgba(255,255,255,.7) inset, 0 18px 42px -30px rgba(32,38,88,.55);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:"Montserrat",system-ui,sans-serif;
+    background:var(--bg);color:var(--text);line-height:1.55;
+    -webkit-font-smoothing:antialiased;overflow:hidden;position:relative;
+  }
+
+  .shell{display:grid;grid-template-columns:288px 1fr;height:100vh}
+
+  /* ---------- side rail ---------- */
+  .rail{
+    background:var(--navy);border-right:1px solid var(--navy-deep);
+    padding:32px 26px;display:flex;flex-direction:column;overflow:hidden;color:#fff;
+  }
+  .brand{display:flex;align-items:baseline;gap:10px;margin-bottom:4px}
+  .brand .mark{font-weight:800;font-size:21px;letter-spacing:-.4px;color:#fff}
+  .brand .mark em{font-style:normal;color:var(--green)}
+  .brand .tag{font-size:9.5px;letter-spacing:2.5px;text-transform:uppercase;color:var(--green);padding-top:6px;font-weight:600}
+  .rail-sub{font-size:12.5px;color:rgba(255,255,255,.6);margin:2px 0 26px;border-bottom:1px solid rgba(255,255,255,.12);padding-bottom:22px}
+  nav{flex:1;overflow-y:auto;margin:0 -8px;padding:0 8px}
+  nav::-webkit-scrollbar{width:0}
+  .nav-item{
+    display:flex;align-items:center;gap:13px;width:100%;border:none;background:none;text-align:left;cursor:pointer;
+    padding:9px 10px;border-radius:9px;color:rgba(255,255,255,.78);font-family:inherit;font-size:13px;font-weight:500;
+    transition:background .18s,color .18s;
+  }
+  .nav-item:hover{background:rgba(255,255,255,.07);color:#fff}
+  .nav-item .num{font-size:11px;font-weight:600;color:rgba(255,255,255,.4);width:20px;flex:none;transition:color .18s}
+  .nav-item.active{background:var(--green);color:var(--navy);font-weight:700}
+  .nav-item.active .num{color:var(--navy)}
+  .nav-item.done .num::before{content:"✓ ";color:var(--green)}
+  .rail-foot{font-size:9.5px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.45);font-weight:600;padding-top:18px;border-top:1px solid rgba(255,255,255,.12);margin-top:10px}
+
+  /* ---------- main ---------- */
+  .main{display:flex;flex-direction:column;overflow:hidden;position:relative}
+  .topbar{display:flex;align-items:center;gap:18px;padding:18px 46px;border-bottom:1px solid var(--line);background:rgba(244,246,250,.88);backdrop-filter:blur(8px);z-index:5}
+  .progress-track{flex:1;height:3px;background:var(--line);border-radius:99px;overflow:hidden}
+  .progress-fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .5s cubic-bezier(.6,.02,.1,1)}
+  .counter{font-size:12px;font-weight:600;color:var(--navy-soft);letter-spacing:1px;white-space:nowrap}
+
+  .stage{flex:1;overflow-y:auto;scroll-behavior:smooth}
+  .stage::-webkit-scrollbar{width:10px}
+  .stage::-webkit-scrollbar-thumb{background:var(--line-strong);border-radius:99px;border:3px solid var(--bg)}
+  .wrap{max-width:760px;margin:0 auto;padding:56px 46px 130px}
+
+  .chapter{display:none}
+  .chapter.active{display:block}
+  .chapter.active .reveal{animation:rise .6s cubic-bezier(.2,.7,.2,1) both}
+  .chapter.active .reveal:nth-child(1){animation-delay:.02s}
+  .chapter.active .reveal:nth-child(2){animation-delay:.08s}
+  .chapter.active .reveal:nth-child(3){animation-delay:.14s}
+  .chapter.active .reveal:nth-child(4){animation-delay:.20s}
+  .chapter.active .reveal:nth-child(5){animation-delay:.26s}
+  .chapter.active .reveal:nth-child(6){animation-delay:.32s}
+  .chapter.active .reveal:nth-child(7){animation-delay:.38s}
+  .chapter.active .reveal:nth-child(8){animation-delay:.44s}
+  .chapter.active .reveal:nth-child(9){animation-delay:.50s}
+  .chapter.active .reveal:nth-child(n+10){animation-delay:.54s}
+  @keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+
+  .eyebrow{font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--green-deep);margin-bottom:14px;display:flex;align-items:center;gap:12px}
+  .eyebrow::after{content:"";height:1px;flex:1;background:var(--line)}
+  h1{font-weight:800;font-size:clamp(33px,5vw,50px);line-height:1.04;letter-spacing:-1px;color:var(--ink);margin-bottom:18px}
+  h1 em{font-style:normal;color:var(--green-deep)}
+  h2{font-weight:700;font-size:25px;letter-spacing:-.3px;color:var(--ink);margin:38px 0 14px}
+  h3{font-size:16px;font-weight:700;color:var(--ink);margin:26px 0 8px;letter-spacing:-.1px}
+  p{margin-bottom:14px;color:var(--text);font-size:15.5px}
+  .lead{font-size:18.5px;line-height:1.5;color:var(--text-soft);font-weight:500}
+  strong{font-weight:700;color:var(--ink)}
+  .accent{color:var(--green-deep);font-weight:700}
+
+  .grid{display:grid;gap:14px;margin:22px 0}
+  .grid.three{grid-template-columns:repeat(3,1fr)}
+  .grid.two{grid-template-columns:repeat(2,1fr)}
+  .tile{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;box-shadow:var(--shadow)}
+  .tile .ico{font-size:11px;font-weight:700;color:var(--green-deep);letter-spacing:1.5px;margin-bottom:10px}
+  .tile h3{margin:0 0 6px}
+  .tile p{font-size:14px;margin:0;color:var(--text-soft)}
+
+  .tbl{width:100%;border-collapse:collapse;margin:20px 0;font-size:14.5px;background:var(--card);border-radius:12px;overflow:hidden;border:1px solid var(--line)}
+  .tbl th{text-align:left;font-size:10.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--navy-soft);padding:13px 16px;background:var(--bg-2);border-bottom:1px solid var(--line)}
+  .tbl td{padding:14px 16px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--text)}
+  .tbl tr:last-child td{border-bottom:none}
+  .tbl td strong{display:block}
+
+  .steps{counter-reset:s;margin:22px 0;display:flex;flex-direction:column;gap:2px}
+  .step{display:flex;gap:18px;padding:18px 0;border-bottom:1px solid var(--line)}
+  .step:last-child{border-bottom:none}
+  .step .badge{counter-increment:s;flex:none;width:34px;height:34px;border-radius:50%;border:2px solid var(--green);color:var(--green-deep);display:grid;place-items:center;font-size:13px;font-weight:800}
+  .step .badge::before{content:counter(s,decimal-leading-zero)}
+  .step .body h3{margin:4px 0 4px}
+  .step .body p{font-size:14.5px;margin:0;color:var(--text-soft)}
+  .path{font-size:12.5px;font-weight:600;background:rgba(0,214,131,.13);padding:2px 8px;border-radius:6px;color:var(--teal);white-space:nowrap}
+
+  .call{border-radius:12px;padding:16px 18px 16px 20px;margin:18px 0;border-left:3px solid;font-size:14.5px}
+  .call .k{font-size:10px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;display:block;margin-bottom:5px}
+  .call p{margin:0;font-size:14.5px}
+  .call.note{background:rgba(32,38,88,.05);border-color:var(--navy-soft)}
+  .call.note .k{color:var(--navy-soft)}
+  .call.imp{background:rgba(22,132,107,.09);border-color:var(--teal)}
+  .call.imp .k{color:var(--teal)}
+  .call.tip{background:rgba(0,214,131,.10);border-color:var(--green)}
+  .call.tip .k{color:var(--green-deep)}
+
+  .dd{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:20px 0}
+  .dd .col{border-radius:12px;padding:18px;border:1px solid var(--line);background:var(--card)}
+  .dd .col h4{font-size:11px;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+  .dd .yes h4{color:var(--green-deep)}
+  .dd .no h4{color:var(--navy-soft)}
+  .dd ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+  .dd li{font-size:13.5px;padding-left:20px;position:relative;color:var(--text)}
+  .dd .yes li::before{content:"✓";position:absolute;left:0;color:var(--green-deep);font-weight:800}
+  .dd .no li::before{content:"✕";position:absolute;left:0;color:var(--mist);font-weight:800}
+
+  .code{position:relative;margin:18px 0;border-radius:12px;overflow:hidden;border:1px solid var(--navy-deep);background:var(--navy-deep)}
+  .code .bar{display:flex;align-items:center;justify-content:space-between;padding:9px 14px;background:#23285c;border-bottom:1px solid rgba(255,255,255,.08)}
+  .code .bar span{font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:#9aa3cc}
+  .code .copy{font-size:10px;font-weight:600;letter-spacing:1px;background:none;border:1px solid var(--green);color:var(--green);padding:4px 10px;border-radius:6px;cursor:pointer;transition:.18s}
+  .code .copy:hover{background:var(--green);color:var(--navy)}
+  .code pre{padding:16px;overflow-x:auto;font-family:"JetBrains Mono",monospace;font-size:12.5px;line-height:1.65;color:#e3e7fb;white-space:pre-wrap}
+
+  .shot{margin:18px 0;border:2px dashed var(--line-strong);border-radius:14px;min-height:200px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;background:repeating-linear-gradient(45deg,transparent,transparent 12px,rgba(32,38,88,.03) 12px,rgba(32,38,88,.03) 24px);color:var(--text-soft);padding:30px}
+  .shot .cam{font-size:26px;opacity:.5}
+  .shot .lbl{font-size:11px;font-weight:700;letter-spacing:1.3px;text-transform:uppercase}
+  .shot .hint{font-size:12px;max-width:340px}
+  .shot img{max-width:100%;border-radius:10px;display:none}
+  .shot.filled{border-style:solid;border-color:var(--line);padding:6px;min-height:0;background:none}
+  .shot.filled img{display:block}
+  .shot.filled .cam,.shot.filled .lbl,.shot.filled .hint{display:none}
+
+  /* ---------- cover (light, used for finale) ---------- */
+  .cover{text-align:left;padding-top:4vh}
+  .cover .meta{display:flex;gap:28px;flex-wrap:wrap;margin:30px 0 36px;font-size:11px;font-weight:600;letter-spacing:1px;color:var(--text-soft);text-transform:uppercase}
+  .cover .meta b{display:block;color:var(--ink);font-size:14px;letter-spacing:0;text-transform:none;font-weight:700;margin-top:3px}
+
+  /* ---------- hero cover (navy gradient) ---------- */
+  .cover.hero{
+    margin:-56px -46px 0;padding:64px 46px 56px;color:#fff;position:relative;overflow:hidden;
+    background:linear-gradient(135deg,#202658 0%,#1f3a5e 52%,#13795f 100%);
+  }
+  .cover.hero::after{
+    content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;
+    background:repeating-linear-gradient(58deg,transparent 0 38px,rgba(0,214,131,.05) 38px 39px);
+    -webkit-mask-image:linear-gradient(to left,#000,transparent 55%);mask-image:linear-gradient(to left,#000,transparent 55%);
+  }
+  .cover.hero>*{position:relative;z-index:1}
+  .cover.hero .eyebrow{color:var(--green)}
+  .cover.hero .eyebrow::after{background:rgba(255,255,255,.2)}
+  .cover.hero h1{color:#fff}
+  .cover.hero h1 em{color:var(--green)}
+  .cover.hero .lead{color:rgba(255,255,255,.82)}
+  .cover.hero .meta{color:rgba(255,255,255,.55)}
+  .cover.hero .meta b{color:#fff}
+  .cover.hero .call.note{background:rgba(255,255,255,.08);border-color:var(--green)}
+  .cover.hero .call.note .k{color:var(--green)}
+  .cover.hero .call.note p{color:rgba(255,255,255,.85)}
+  .cover.hero p{color:rgba(255,255,255,.7)}
+  .cover.hero .kbd{border-color:rgba(255,255,255,.3);color:rgba(255,255,255,.7)}
+
+  .folder-art{margin:8px 0 28px;background:var(--navy-deep);border-radius:14px;padding:22px 24px;color:#cdd3f0;font-family:"JetBrains Mono",monospace;font-size:13px;line-height:1.9;border:1px solid var(--navy-deep)}
+  .folder-art .d{color:var(--green)}
+  .folder-art .c{color:#7079ad}
+
+  .footnav{position:absolute;bottom:0;left:0;right:0;display:flex;justify-content:space-between;gap:14px;padding:18px 46px;background:linear-gradient(0deg,var(--bg) 60%,transparent)}
+  .btn{font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;border-radius:10px;padding:12px 22px;display:inline-flex;align-items:center;gap:10px;transition:.18s;border:1px solid var(--line-strong)}
+  .btn.ghost{background:transparent;color:var(--navy)}
+  .btn.ghost:hover{background:rgba(32,38,88,.05)}
+  .btn.solid{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .btn.solid:hover{background:var(--green);border-color:var(--green);color:var(--navy)}
+  .btn:disabled{opacity:.3;cursor:default}
+  .btn.solid:disabled:hover{background:var(--navy);color:#fff}
+
+  .cta{font-family:inherit;font-size:15px;font-weight:700;cursor:pointer;background:var(--green);color:var(--navy);border:none;padding:15px 30px;border-radius:11px;transition:.2s;box-shadow:0 14px 32px -14px rgba(0,214,131,.6)}
+  .cta:hover{background:#fff;transform:translateY(-1px)}
+
+  .kbd{font-size:10px;font-weight:600;border:1px solid var(--line-strong);border-radius:5px;padding:1px 6px;color:var(--text-soft)}
+
+  @media(max-width:880px){
+    .shell{grid-template-columns:1fr}
+    .rail{display:none}
+    .wrap{padding:40px 22px 130px}
+    .cover.hero{margin:-40px -22px 0;padding:48px 22px 40px}
+    .grid.three,.grid.two,.dd{grid-template-columns:1fr}
+    .topbar{padding:14px 22px}
+    .footnav{padding:16px 22px}
+  }
+</style>
+</head>
+<body>
+<div class="shell">
+  <!-- ============ SIDE RAIL ============ -->
+  <aside class="rail">
+    <div class="brand">
+      <div class="mark">Claude <em>×</em> Finovate</div>
+    </div>
+    <div class="brand"><div class="tag">Using Claude · v1</div></div>
+    <div class="rail-sub">The companion to Staff Setup. How to actually get work out of Claude.</div>
+    <nav id="nav"></nav>
+    <div class="rail-foot">Owners · Yanga &amp; Milan</div>
+  </aside>
+
+  <!-- ============ MAIN ============ -->
+  <div class="main">
+    <div class="topbar">
+      <div class="progress-track"><div class="progress-fill" id="fill"></div></div>
+      <div class="counter" id="counter">01 / 11</div>
+    </div>
+
+    <div class="stage" id="stage">
+      <div class="wrap" id="wrap"><!-- chapters injected --></div>
+    </div>
+
+    <div class="footnav">
+      <button class="btn ghost" id="prev">← Back</button>
+      <button class="btn solid" id="next">Next →</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ---------------- CONTENT ---------------- */
+const chapters = [
+{ navTitle:"Welcome", num:"00", html:`
+  <div class="cover hero">
+    <div class="eyebrow reveal">Internal · All Staff</div>
+    <h1 class="reveal">Now <em>use it</em><br>like Finovate.</h1>
+    <p class="lead reveal">The setup guide got Claude configured. This one is about getting good work out of it — which model to pick, when to build a Skill versus a Project, how to connect Microsoft 365 and Smartsheet, and how to point Claude at a client's folder without it wandering into the wrong one. Click through in order; each card stands on its own if you need to come back.</p>
+    <div class="meta reveal">
+      <div>Owner<b>Yanga Tolashe / Milan de Kock</b></div>
+      <div>Companion to<b>Staff Setup Guide · v1</b></div>
+      <div>Applies to<b>All Finovate staff</b></div>
+    </div>
+    <div class="call note reveal"><span class="k">Before you start</span><p>You should already have accepted your seat and written your profile. If not, do the Setup Guide first — this one assumes it.</p></div>
+    <button class="cta reveal" onclick="go(1)">Start →</button>
+    <p class="reveal" style="margin-top:18px;font-size:13px;color:rgba(255,255,255,.6)">Tip — <span class="kbd">←</span> <span class="kbd">→</span> arrow keys move between cards.</p>
+  </div>
+`},
+
+{ navTitle:"Three dials", num:"01", html:`
+  <div class="eyebrow reveal">Section 01</div>
+  <h1 class="reveal">The three dials</h1>
+  <p class="lead reveal">Every task is a combination of three choices. Get these right and everything else follows.</p>
+  <div class="grid three reveal">
+    <div class="tile"><div class="ico">MODEL</div><h3>Which model</h3><p>How much thinking power. Fast and cheap for simple things; top-tier for hard reasoning. Card 02.</p></div>
+    <div class="tile"><div class="ico">SURFACE</div><h3>Chat, Project or Skill</h3><p>Where the work lives and whether it repeats. Cards 04–05.</p></div>
+    <div class="tile"><div class="ico">CONTEXT</div><h3>What Claude can see</h3><p>Connectors and client folders — what data is in reach. Cards 06–09.</p></div>
+  </div>
+  <div class="call imp reveal"><span class="k">The mindset</span><p>Claude is not a search box you fire one question at. It works best when you've deliberately set the model, the surface, and the context for the job in front of you. Five seconds of choosing beats re-explaining yourself ten times.</p></div>
+`},
+
+{ navTitle:"Which model", num:"02", html:`
+  <div class="eyebrow reveal">Section 02 · Pick the right power</div>
+  <h1 class="reveal">Which model, <em>when</em></h1>
+  <p class="lead reveal">Think in tiers, not names. Names change every few months; the tiers don't. Pick by how hard the task actually is.</p>
+  <table class="tbl reveal">
+    <thead><tr><th>Tier</th><th>Use it for</th><th>Current example</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Fast</strong></td><td>Quick lookups, reformatting, short drafts, simple extraction. Cheap and instant.</td><td>Haiku</td></tr>
+      <tr><td><strong>Balanced</strong><br><span class="path">your default</span></td><td>Most real work — analysis, client writing, multi-step tasks, coding. The one you'll live in.</td><td>Sonnet</td></tr>
+      <tr><td><strong>Top-tier</strong></td><td>Genuinely hard reasoning, thorny modelling logic, tricky judgement calls, long complex documents.</td><td>Opus</td></tr>
+    </tbody>
+  </table>
+  <div class="call tip reveal"><span class="k">Rule of thumb</span><p>Start on <strong>Balanced</strong>. Drop to Fast only when the task is trivial and you want speed. Reach for Top-tier when Balanced gives you a mediocre answer on something that genuinely needs deeper thinking — not by default.</p></div>
+  <h2 class="reveal">The second dial: effort</h2>
+  <p class="lead reveal">Next to the model there's an <strong>effort</strong> setting — Low, Medium, High, Max. It controls how hard the model thinks <em>before</em> answering, independently of which model you picked. High is the sensible default; Low is fine for simple asks; Max is for genuinely hard, correctness-critical work and is slow.</p>
+  <div class="call imp reveal"><span class="k">Read this bit twice — it's the one people miss</span><p>Both dials cost <strong>credits</strong>, and they stack. A top-tier model burns more than a balanced one. Cranking effort to Max burns more again. Some top models run through your weekly allowance <em>roughly twice as fast</em> per unit of work. Running everything on the biggest model at Max effort is like couriering a birthday card — it arrives, but you've spent a fortune to send it.</p></div>
+  <div class="call note reveal"><span class="k">And yes — the prompt itself costs too</span><p>A rambling, disorganised prompt makes the model read and think more, which costs more <em>and</em> usually gives a worse answer. A tight, clear prompt is cheaper and better at the same time. This is the habit worth building — for all of us, me included. The "Getting good answers" card near the end is all about exactly that.</p></div>
+`},
+
+{ navTitle:"Decision router", num:"03", html:`
+  <div class="eyebrow reveal">Section 03 · One glance</div>
+  <h1 class="reveal">Which surface do I need?</h1>
+  <p class="lead reveal">Before starting anything, run these three questions. They decide whether you open a chat, a Project, or build a Skill.</p>
+  <div class="steps reveal">
+    <div class="step"><div class="badge"></div><div class="body"><h3>Will I do this exact task again?</h3><p>If yes and it follows fixed steps → it's a <strong>Skill</strong> candidate. If it's a one-off → a chat is fine.</p></div></div>
+    <div class="step"><div class="badge"></div><div class="body"><h3>Does it need standing context?</h3><p>Client docs, brand voice, terminology that should load every time → put it in a <strong>Project</strong>. Card 04.</p></div></div>
+    <div class="step"><div class="badge"></div><div class="body"><h3>Does it need live data from a tool?</h3><p>Email, calendar, Smartsheet, SharePoint files → you need a <strong>connector</strong>. Cards 06–08.</p></div></div>
+  </div>
+  <div class="call tip reveal"><span class="k">Most common combo</span><p>A client Project (standing context) + Microsoft 365 connected (live files) + any repeat task packaged as a Skill. That trio covers the bulk of Finovate work.</p></div>
+`},
+
+{ navTitle:"Skill vs Project", num:"04", html:`
+  <div class="eyebrow reveal">Section 04 · The distinction people miss</div>
+  <h1 class="reveal">Skill <em>vs</em> Project</h1>
+  <p class="lead reveal">They sound similar and solve different problems. Getting them mixed up is the most common early mistake.</p>
+  <div class="grid two reveal">
+    <div class="tile"><div class="ico">PROJECT</div><h3>A place</h3><p>A workspace that holds instructions and documents. Everything you do inside it inherits that context. One per ongoing client or workstream. Think: a room with the right files already on the desk.</p></div>
+    <div class="tile"><div class="ico">SKILL</div><h3>A procedure</h3><p>A packaged, repeatable task — fixed steps Claude follows the same way every time. Think: a recipe card you hand over. It runs inside chats and Projects alike.</p></div>
+  </div>
+  <div class="call imp reveal"><span class="k">The clean mental model</span><p>A <strong>Project</strong> answers "what does Claude know here?" A <strong>Skill</strong> answers "what does Claude <em>do</em>, step by step?" You often use both at once: a Skill running inside a client Project.</p></div>
+  <div class="call note reveal"><span class="k">Built one that works? Tell someone.</span><p>If you make a Skill that reliably does the job, send it to <strong>Milan or Yanga</strong>. Good ones get promoted to proper org-wide Skills so the whole team can use them — plus a high five, some recognition, and eternal glory. (The glory part is negotiable.)</p></div>
+`},
+
+{ navTitle:"Set up a Project", num:"04·B", html:`
+  <div class="eyebrow reveal">Section 04·B · Do it once, properly</div>
+  <h1 class="reveal">Setting up a Project <em>well</em></h1>
+  <p class="lead reveal">A good Project is set up once and then just works. A sloppy one leaks context, misses files, or points Claude at the wrong client. This card is the whole setup — including how you point Claude at the right folder, which only happens here.</p>
+  <div class="call note reveal"><span class="k">Same pattern everywhere</span><p>This applies to <strong>every</strong> Project — client work and internal work alike (data consolidation, API deployment, efficiency projects). Internal Projects still get the guardrails file and a <span class="path">CLIENT_FOLDER:</span> line; it just points at that workstream's folder instead of a client's. One pattern, no exceptions.</p></div>
+  <div class="steps reveal">
+    <div class="step"><div class="badge"></div><div class="body"><h3>Create and name it to match SharePoint</h3><p>One Project per client or workstream. <strong>Name it exactly as the client appears in SharePoint</strong> — same spelling, same legal suffix. That one rule makes the folder mapping obvious and keeps forty Projects navigable. No "acme final v2".</p></div></div>
+    <div class="step"><div class="badge"></div><div class="body"><h3>Add the guardrails file</h3><p>Drop the SharePoint guardrails markdown into the Project's knowledge. Required, not optional — it's what keeps Claude locked to this client's folder. It's identical in every Project; download it once and reuse. <strong>Leave it unchanged</strong> — editing your copy drifts from everyone else's.</p></div></div>
+    <div class="step"><div class="badge"></div><div class="body"><h3>Write focused instructions — with the folder line</h3><p>Who the client is, engagement scope, terminology, output style. Keep it tight; instructions are read every time. Then the one line that scopes everything: <span class="path">CLIENT_FOLDER:</span> + the folder path. That single line is the only per-client difference in how Claude reads SharePoint.</p></div></div>
+    <div class="step"><div class="badge"></div><div class="body"><h3>Load the important client documents</h3><p>Load the client docs that give Claude standing context — engagement letters, prior AFS, key correspondence, whatever it should always know. <strong>Don't</strong> load template files (proposal templates, letter templates) as knowledge — those are better handled by a Skill that generates the document, so the format stays current in one place instead of drifting across dozens of Projects.</p></div></div>
+    <div class="step"><div class="badge"></div><div class="body"><h3>Turn on Microsoft 365 — it's not automatic</h3><p>Connecting M365 once in <span class="path">Settings → Connectors</span> is not enough. You also enable it <strong>per conversation</strong>, using the connector control in the composer, each time you want Claude to reach SharePoint in that chat. If Claude says it can't see your files, this is almost always why.</p></div></div>
+    <div class="step"><div class="badge"></div><div class="body"><h3>Share the Project, then test the scope</h3><p>Set the Project private, then invite the team with the right permissions. Now run two checks: ask for a file you know <em>is</em> in the folder (should read cleanly), then ask for one from a <em>different</em> client (Claude should refuse and stay in the authorised folder). The second check is the one that proves scoping works — see the callout below.</p></div></div>
+  </div>
+  <div class="call imp reveal"><span class="k">What actually keeps Claude in the folder — the honest version</span><p>SharePoint search is <strong>tenant-wide</strong>, so a bare client-name search can surface the wrong client's files. The <span class="path">CLIENT_FOLDER:</span> line plus the guardrails file <strong>instruct</strong> Claude to search only the named folder — checking Project Knowledge first, treating SharePoint as the backstop, and stopping to tell you rather than widening if a document isn't there. But understand what this is: Claude follows written instructions well, yet this is a <strong>guardrail, not a hard technical lock</strong>. It steers strongly; it doesn't physically prevent a wider search the way a permission would. That's why you <strong>test the scope when you set the Project up</strong> — the "ask for another client's file and confirm it refuses" check is how you know the instruction behaves like a rule in your tenant. Do it once per new Project, then trust it. The file is also read-only: when a SharePoint doc should become permanent Project Knowledge, Claude hands you a file to upload rather than saving anything itself.</p></div>
+  <div class="call imp reveal"><span class="k">Never a shared "Clients" Project</span><p>One client (or workstream) = one Project, always. A catch-all Project holding several clients breaks the folder scoping instantly — the guardrails design assumes exactly one authorised folder per Project.</p></div>
+  <div class="call tip reveal"><span class="k">Don't know the folder path?</span><p>Ask Claude in a chat inside the Project — the guardrails file walks you through finding and confirming it, then hands you the exact <span class="path">CLIENT_FOLDER:</span> line to paste.</p></div>
+  <div class="call tip reveal"><span class="k">Get the guardrails file</span><p><a href="https://finovate.sharepoint.com/:t:/r/sites/EmployeeOnboarding/Document%20Library/SOPs/Claude/MD%20Files/CLAUDE_SharePoint_Guardrails.md" style="color:var(--green-deep);text-decoration:underline;font-weight:700">CLAUDE_SharePoint_Guardrails.md</a> — in <span class="path">EmployeeOnboarding → SOPs → Claude → MD Files</span>. Use it as-is.</p></div>
+`},
+
+
+{ navTitle:"When to build a Skill", num:"05", html:`
+  <div class="eyebrow reveal">Section 05 · Don't over-build</div>
+  <h1 class="reveal">When to build a Skill</h1>
+  <p class="lead reveal">Skills are worth it when a task is repetitive <strong>and</strong> follows a stable procedure. If either is missing, don't bother — just prompt well.</p>
+  <div class="dd reveal">
+    <div class="col yes"><h4>Good Skill candidate</h4><ul>
+      <li>You do it weekly or monthly, the same way</li>
+      <li>The steps are fixed and describable</li>
+      <li>Output format matters and shouldn't drift</li>
+      <li>Others on the team do it too</li>
+    </ul></div>
+    <div class="col no"><h4>Not worth a Skill</h4><ul>
+      <li>One-off or rare tasks</li>
+      <li>Steps change every time / need judgement</li>
+      <li>You're still figuring out the process</li>
+      <li>A good one-line prompt already nails it</li>
+    </ul></div>
+  </div>
+  <div class="call tip reveal"><span class="k">Start by describing, not building</span><p>Write out the steps you'd take manually, in plain English, and test them as a normal prompt first. If it works reliably a few times, <em>then</em> it's worth packaging. Ask a Skill owner (Yanga or Milan) to help formalise it.</p></div>
+`},
+
+{ navTitle:"How to shape a Skill", num:"05·B", html:`
+  <div class="eyebrow reveal">Section 05·B · Build it yourself</div>
+  <h1 class="reveal">How to shape a Skill</h1>
+  <p class="lead reveal"><strong>You build the Skill yourself</strong> — Claude will help you write it. The craft is describing the task so precisely that it runs the same way every time. Get these four things right and the Skill mostly writes itself. Ask Claude to help turn them into a proper Skill; that's exactly the kind of thing it's good at.</p>
+  <h2 class="reveal">What your Skill must spell out</h2>
+  <div class="steps reveal">
+    <div class="step"><div class="badge"></div><div class="body"><h3>The trigger</h3><p>What situation should this Skill fire on? "When I upload a Karbon timesheet export and ask to clean it up." Be concrete — this is how Claude knows when to use it.</p></div></div>
+    <div class="step"><div class="badge"></div><div class="body"><h3>The inputs</h3><p>What Claude receives each time — a specific file type, a sheet, pasted text. Note anything about its shape (columns, format) that matters.</p></div></div>
+    <div class="step"><div class="badge"></div><div class="body"><h3>The steps, in order</h3><p>Exactly what you'd do by hand, numbered. Don't skip the "obvious" ones — the obvious steps are the ones that drift when they're left unsaid.</p></div></div>
+    <div class="step"><div class="badge"></div><div class="body"><h3>The output</h3><p>What the finished thing looks like and where it goes. Attach a real example of a good one if you have it — a sample beats a description every time.</p></div></div>
+  </div>
+  <div class="call imp reveal"><span class="k">Prove it as a prompt first</span><p>Before you package anything into a Skill, run your written steps as a normal prompt two or three times on real cases. If it holds up, it's ready to build. If it wobbles, the wobble tells you which step needs sharpening — fix that in the description, not in the Skill.</p></div>
+  <div class="call tip reveal"><span class="k">Built a good one? Flag it.</span><p>You create and keep your own Skills — no need to ask permission. But if one works really well and others would use it, tell <strong>Milan or Yanga</strong>. We'll promote it to a proper org-wide Skill so the whole team gets it. You did the building; we just put it on the shelf for everyone.</p></div>
+`},
+
+{ navTitle:"Connectors", num:"06", html:`
+  <div class="eyebrow reveal">Section 06 · Giving Claude reach</div>
+  <h1 class="reveal">Connectors, in one minute</h1>
+  <p class="lead reveal">A connector lets Claude read (and sometimes act on) an external system — your email, calendar, files, or a tool like Smartsheet. Without one, Claude only sees what's in the chat or Project.</p>
+  <h2 class="reveal">The two that matter here</h2>
+  <div class="grid two reveal">
+    <div class="tile"><div class="ico">MICROSOFT 365</div><h3>Outlook · SharePoint</h3><p>Email, calendar, and the client files living in SharePoint. This is the big one for client work. Card 07.</p></div>
+    <div class="tile"><div class="ico">SMARTSHEET</div><h3>Sheets · reports · dashboards</h3><p>Pull data from, and work with, our Smartsheet workspaces. Card 08.</p></div>
+  </div>
+  <div class="call imp reveal"><span class="k">Where they live</span><p>Turn connectors on in <span class="path">Settings → Connectors</span>, then enable the ones you need <strong>per chat or Project</strong> using the tools/connector control in the composer. Connecting once at the account level isn't the same as switching it on for a given conversation.</p></div>
+  <div class="call note reveal"><span class="k">Permission note</span><p>Reading data is the default. Anything that <em>writes</em> or changes something is more tightly controlled and may be admin-gated. If a write action fails, that's usually why — not a bug.</p></div>
+`},
+
+{ navTitle:"Microsoft 365", num:"07", html:`
+  <div class="eyebrow reveal">Section 07 · The important connector</div>
+  <h1 class="reveal">Connecting Microsoft 365</h1>
+  <p class="lead reveal">This gives Claude reach into Outlook and the SharePoint document library — which is where most client work actually lives.</p>
+  <div class="steps reveal">
+    <div class="step"><div class="badge"></div><div class="body"><h3>Enable it</h3><p><span class="path">Settings → Connectors → Microsoft 365</span>, then sign in with your <strong>Finovate work account</strong>.</p></div></div>
+    <div class="step"><div class="badge"></div><div class="body"><h3>Use your work account only</h3><p>Never connect a personal <em>@outlook</em> / <em>@hotmail</em> account. Work data goes through the work account, full stop.</p></div></div>
+    <div class="step"><div class="badge"></div><div class="body"><h3>Switch it on in the conversation</h3><p>In the chat or Project composer, toggle the Microsoft 365 connector on for that session.</p></div></div>
+    <div class="step"><div class="badge"></div><div class="body"><h3>Ask</h3><p><em>"Summarise the unread emails from [client] this week"</em> or <em>"Find their latest management accounts in SharePoint."</em></p></div></div>
+  </div>
+  <div class="call note reveal"><span class="k">Two things to expect</span><p>SharePoint search is <strong>tenant-wide by design</strong> — it can see across sites, which is exactly why the client-folder guardrails in the Project setup (card 04·B) matter. And write actions (sending, editing, changing settings) are admin-gated; reading is not.</p></div>
+`},
+
+{ navTitle:"Smartsheet", num:"08", html:`
+  <div class="eyebrow reveal">Section 08 · Structured data</div>
+  <h1 class="reveal">Connecting Smartsheet</h1>
+  <p class="lead reveal">Use this when the work involves our Smartsheet workspaces — pulling figures from a sheet, checking a report, or updating rows.</p>
+  <div class="steps reveal">
+    <div class="step"><div class="badge"></div><div class="body"><h3>Enable it</h3><p><span class="path">Settings → Connectors → Smartsheet</span> and authorise access.</p></div></div>
+    <div class="step"><div class="badge"></div><div class="body"><h3>Turn it on in the conversation</h3><p>Same as M365 — enable it in the composer for the chat or Project you're working in.</p></div></div>
+    <div class="step"><div class="badge"></div><div class="body"><h3>Be specific about the sheet</h3><p>Name the workspace or sheet so Claude searches the right place: <em>"In the [workspace] Smartsheet, list rows where status is overdue."</em></p></div></div>
+  </div>
+  <div class="call imp reveal"><span class="k">Destructive actions need care</span><p>Deleting rows, columns, or comments is permanent. Claude will flag these, but you should confirm deliberately — treat a delete like you would in the Smartsheet app itself.</p></div>
+`},
+
+{ navTitle:"Getting good answers", num:"09", html:`
+  <div class="eyebrow reveal">Section 10 · Prompting</div>
+  <h1 class="reveal">Getting good answers</h1>
+  <p class="lead reveal">The quality of what comes out tracks the quality of what goes in. A few habits do most of the work.</p>
+  <div class="steps reveal">
+    <div class="step"><div class="badge"></div><div class="body"><h3>Say who it's for and why</h3><p>"Draft a note to a client's FD explaining a variance" beats "explain this variance." Audience and purpose shape the whole answer.</p></div></div>
+    <div class="step"><div class="badge"></div><div class="body"><h3>Give an example of "good"</h3><p>Paste a prior deliverable you liked. Claude matches format and tone far better from a sample than from adjectives.</p></div></div>
+    <div class="step"><div class="badge"></div><div class="body"><h3>Ask it to think first on hard tasks</h3><p>"Work through the logic step by step before giving the answer" measurably improves reasoning-heavy work.</p></div></div>
+    <div class="step"><div class="badge"></div><div class="body"><h3>Iterate — don't restart</h3><p>Correct it in the same chat: "good, but tighten the second paragraph and drop the jargon." It keeps the context.</p></div></div>
+  </div>
+  <div class="call tip reveal"><span class="k">Deeper guidance</span><p>Anthropic's prompting docs are genuinely good: <span class="path">docs.claude.com/en/docs/build-with-claude/prompt-engineering</span></p></div>
+`},
+
+{ navTitle:"You're set", num:"10", html:`
+  <div class="cover">
+    <div class="eyebrow reveal">Section 10 · Done</div>
+    <h1 class="reveal">That's the <em>working</em> knowledge.</h1>
+    <p class="lead reveal">You know how to pick a model, when to build a Skill versus a Project, how to connect Microsoft 365 and Smartsheet, and how to keep client work scoped to the right folder. The rest is reps.</p>
+    <h2 class="reveal">Quick reference</h2>
+    <table class="tbl reveal">
+      <thead><tr><th>Need</th><th>Reach for</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Default work</strong></td><td>Balanced model, in the relevant Project</td></tr>
+        <tr><td><strong>A repeat task</strong></td><td>Check existing Skills first, then build</td></tr>
+        <tr><td><strong>Client files</strong></td><td>M365 + guardrails file + CLIENT_FOLDER line</td></tr>
+        <tr><td><strong>Prompting help</strong></td><td>docs.claude.com prompt-engineering</td></tr>
+      </tbody>
+    </table>
+    <div class="call tip reveal"><span class="k">And remember</span><p>Claude gets you to the thinking faster. It doesn't replace your judgement — review everything before it leaves your hands.</p></div>
+    <button class="cta reveal" onclick="go(0)">↺ Back to the start</button>
+  </div>
+`}
+];
+/* ---------------- ENGINE ---------------- */
+const wrap=document.getElementById('wrap');
+const nav=document.getElementById('nav');
+const fill=document.getElementById('fill');
+const counter=document.getElementById('counter');
+const prevBtn=document.getElementById('prev');
+const nextBtn=document.getElementById('next');
+const stage=document.getElementById('stage');
+let i=0;
+const total=chapters.length;
+const visited=new Set([0]);
+
+// build chapters + nav
+chapters.forEach((c,idx)=>{
+  const sec=document.createElement('section');
+  sec.className='chapter';
+  sec.dataset.idx=idx;
+  sec.innerHTML=c.html;
+  wrap.appendChild(sec);
+
+  const b=document.createElement('button');
+  b.className='nav-item';
+  b.innerHTML=`<span class="num">${c.num}</span>${c.navTitle}`;
+  b.onclick=()=>go(idx);
+  nav.appendChild(b);
+});
+const secs=[...document.querySelectorAll('.chapter')];
+const navItems=[...document.querySelectorAll('.nav-item')];
+
+function render(){
+  secs.forEach((s,idx)=>s.classList.toggle('active',idx===i));
+  navItems.forEach((n,idx)=>{
+    n.classList.toggle('active',idx===i);
+    n.classList.toggle('done',visited.has(idx)&&idx<i);
+  });
+  fill.style.width=(i/(total-1))*100+'%';
+  counter.textContent=String(i+1).padStart(2,'0')+' / '+String(total).padStart(2,'0');
+  prevBtn.disabled=i===0;
+  nextBtn.textContent = i===total-1 ? 'Finish ✓' : 'Next →';
+  stage.scrollTop=0;
+}
+function go(n){
+  i=Math.max(0,Math.min(total-1,n));
+  visited.add(i);
+  render();
+}
+prevBtn.onclick=()=>go(i-1);
+nextBtn.onclick=()=>{ if(i<total-1) go(i+1); else go(0); };
+document.addEventListener('keydown',e=>{
+  if(e.target.closest('input,textarea'))return;
+  if(e.key==='ArrowRight')go(i+1);
+  if(e.key==='ArrowLeft')go(i-1);
+});
+
+// copy buttons
+function cp(btn){
+  const txt=btn.closest('.code').querySelector('pre').innerText;
+  navigator.clipboard.writeText(txt).then(()=>{
+    const o=btn.textContent;btn.textContent='Copied ✓';
+    setTimeout(()=>btn.textContent=o,1400);
+  });
+}
+
+go(0);
+</script>
+</body>
+</html>
