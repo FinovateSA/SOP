@@ -233,7 +233,7 @@
   <div class="main">
     <div class="topbar">
       <div class="progress-track"><div class="progress-fill" id="fill"></div></div>
-      <div class="counter" id="counter">01 / 11</div>
+      <div class="counter" id="counter">01 / 14</div>
     </div>
 
     <div class="stage" id="stage">
@@ -415,7 +415,22 @@ const chapters = [
   <div class="call imp reveal"><span class="k">Destructive actions need care</span><p>Deleting rows, columns, or comments is permanent. Claude will flag these, but you should confirm deliberately — treat a delete like you would in the Smartsheet app itself.</p></div>
 `},
 
-{ navTitle:"Getting good answers", num:"09", html:`
+{ navTitle:"Claude in Excel", num:"09", html:`
+  <div class="eyebrow reveal">Section 09 · In-app</div>
+  <h1 class="reveal">Claude <em>inside</em> Excel</h1>
+  <p class="lead reveal">Different from the Microsoft 365 connector. The connector lets Claude.ai read your SharePoint files; the <strong>add-in</strong> puts Claude in a sidebar <em>inside</em> Excel, Word and PowerPoint — working on the sheet in front of you.</p>
+  <div class="call note reveal"><span class="k">One add-in, three apps</span><p>A single install covers <strong>Excel, Word and PowerPoint</strong>. Outlook is a separate add-in. We mostly use Excel — the steps are identical in each.</p></div>
+  <div class="steps reveal">
+    <div class="step"><div class="badge"></div><div class="body"><h3>Check you're covered</h3><p>Needs a paid Claude plan (Pro, Max, Team or Enterprise) and a modern Excel — Windows (Microsoft 365), Mac, web or iPad. It does <strong>not</strong> work in Excel 2016/2019 or on Android.</p></div></div>
+    <div class="step"><div class="badge"></div><div class="body"><h3>Add it from Excel</h3><p>Open Excel, then <span class="path">Home → Add-ins</span> (on Mac: <span class="path">Tools → Add-ins</span>). Search <strong>"Claude"</strong> and add <em>Claude by Anthropic</em>. If IT has already rolled it out, it'll be there — skip to signing in.</p></div></div>
+    <div class="step"><div class="badge"></div><div class="body"><h3>Open it and sign in</h3><p>Claude appears in the <span class="path">Home</span> ribbon. Click it to open the sidebar, then sign in with your normal Claude account.</p></div></div>
+    <div class="step"><div class="badge"></div><div class="body"><h3>Point it at your work</h3><p>With a workbook open, just ask — <em>"check the totals on the Summary tab"</em> or <em>"build a 12-month cash-flow from these assumptions"</em>. It reads and edits the live sheet.</p></div></div>
+  </div>
+  <div class="call imp reveal"><span class="k">It edits the real file</span><p>The add-in writes to your open workbook, not a copy. For anything that matters, work on a duplicate and <strong>double-check its changes — especially formulas and figures — before it goes near a client</strong>.</p></div>
+  <div class="call tip reveal"><span class="k">Instructions are per-app</span><p>Standing instructions you set in Excel apply to Excel only — Word and PowerPoint keep their own. Official guide: <span class="path">support.claude.com → Use Claude for Excel</span></p></div>
+`},
+
+{ navTitle:"Getting good answers", num:"10", html:`
   <div class="eyebrow reveal">Section 10 · Prompting</div>
   <h1 class="reveal">Getting good answers</h1>
   <p class="lead reveal">The quality of what comes out tracks the quality of what goes in. A few habits do most of the work.</p>
@@ -428,9 +443,9 @@ const chapters = [
   <div class="call tip reveal"><span class="k">Deeper guidance</span><p>Anthropic's prompting docs are genuinely good: <span class="path">docs.claude.com/en/docs/build-with-claude/prompt-engineering</span></p></div>
 `},
 
-{ navTitle:"You're set", num:"10", html:`
+{ navTitle:"You're set", num:"11", html:`
   <div class="cover">
-    <div class="eyebrow reveal">Section 10 · Done</div>
+    <div class="eyebrow reveal">Section 11 · Done</div>
     <h1 class="reveal">That's the <em>working</em> knowledge.</h1>
     <p class="lead reveal">You know how to pick a model, when to build a Skill versus a Project, how to connect Microsoft 365 and Smartsheet, and how to keep client work scoped to the right folder. The rest is reps.</p>
     <h2 class="reveal">Quick reference</h2>

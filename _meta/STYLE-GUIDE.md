@@ -29,7 +29,7 @@ const chapters = [
 - `num` — the number chip in the nav (e.g. `"00"`, `"01"`, `"04·B"`). Purely cosmetic.
 - `html` — the card's inner HTML, written inside backticks (a JS template literal).
 
-The counter (`01 / 11`) is currently **hard-coded** in the `.counter` div — update it to match your number of cards, or the deck still works but the count reads wrong. (The progress *bar* auto-scales; only the text is manual.)
+The counter (`01 / 11`) and progress bar both **auto-update** from `chapters.length` when the page loads — you don't maintain them. The number typed into the `.counter` div is only a pre-JS placeholder shown for a split second before the script runs; it's harmless if it doesn't match, but set it to your real card count to avoid a brief flash of the wrong number.
 
 ---
 
