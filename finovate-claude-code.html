@@ -207,6 +207,9 @@
         <div class="h"><span class="n"></span><h3>Install Claude Code</h3></div>
         <p>Open a terminal (on Windows: <b>PowerShell</b>) and run:</p>
         <div class="code"><span><span class="pr">$</span> npm install -g @anthropic-ai/claude-code</span><button onclick="cp(this)">copy</button></div>
+        <p style="color:var(--amber)">⚠ Windows blocks scripts by default. If you get <em>"running scripts is disabled on this system"</em>, run this once and retry the line above:</p>
+        <div class="code"><span><span class="pr">$</span> Set-ExecutionPolicy -Scope CurrentUser RemoteSigned</span><button onclick="cp(this)">copy</button></div>
+        <p>Still blocked afterwards? IT has locked it via Group Policy — ping Gary rather than fighting it.</p>
       </div>
       <div class="stp">
         <div class="h"><span class="n"></span><h3>Launch &amp; sign in</h3></div>
