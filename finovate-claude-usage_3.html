@@ -415,19 +415,23 @@ const chapters = [
   <div class="call imp reveal"><span class="k">Destructive actions need care</span><p>Deleting rows, columns, or comments is permanent. Claude will flag these, but you should confirm deliberately — treat a delete like you would in the Smartsheet app itself.</p></div>
 `},
 
-{ navTitle:"Claude in Excel", num:"09", html:`
+{ navTitle:"Claude in Office", num:"09", html:`
   <div class="eyebrow reveal">Section 09 · In-app</div>
-  <h1 class="reveal">Claude <em>inside</em> Excel</h1>
-  <p class="lead reveal">Different from the Microsoft 365 connector. The connector lets Claude.ai read your SharePoint files; the <strong>add-in</strong> puts Claude in a sidebar <em>inside</em> Excel, Word and PowerPoint — working on the sheet in front of you.</p>
-  <div class="call note reveal"><span class="k">One add-in, three apps</span><p>A single install covers <strong>Excel, Word and PowerPoint</strong>. Outlook is a separate add-in. We mostly use Excel — the steps are identical in each.</p></div>
-  <div class="steps reveal">
-    <div class="step"><div class="badge"></div><div class="body"><h3>Check you're covered</h3><p>Needs a paid Claude plan (Pro, Max, Team or Enterprise) and a modern Excel — Windows (Microsoft 365), Mac, web or iPad. It does <strong>not</strong> work in Excel 2016/2019 or on Android.</p></div></div>
-    <div class="step"><div class="badge"></div><div class="body"><h3>Add it from Excel</h3><p>Open Excel, then <span class="path">Home → Add-ins</span> (on Mac: <span class="path">Tools → Add-ins</span>). Search <strong>"Claude"</strong> and add <em>Claude by Anthropic</em>. If IT has already rolled it out, it'll be there — skip to signing in.</p></div></div>
-    <div class="step"><div class="badge"></div><div class="body"><h3>Open it and sign in</h3><p>Claude appears in the <span class="path">Home</span> ribbon. Click it to open the sidebar, then sign in with your normal Claude account.</p></div></div>
-    <div class="step"><div class="badge"></div><div class="body"><h3>Point it at your work</h3><p>With a workbook open, just ask — <em>"check the totals on the Summary tab"</em> or <em>"build a 12-month cash-flow from these assumptions"</em>. It reads and edits the live sheet.</p></div></div>
+  <h1 class="reveal">Claude <em>inside</em> Office</h1>
+  <p class="lead reveal">Different from the Microsoft 365 connector. The connector lets Claude.ai read your SharePoint files; the <strong>add-in</strong> puts Claude in a sidebar <em>inside</em> Excel, Word and PowerPoint — working on the file open in front of you, and even carrying data between them.</p>
+  <div class="grid three reveal">
+    <div class="tile"><div class="ico">EXCEL</div><h3>Model &amp; check</h3><p>Read a workbook, build schedules, check totals and formulas.</p></div>
+    <div class="tile"><div class="ico">WORD</div><h3>Draft &amp; summarise</h3><p>Draft a memo from figures in an Excel model; condense a long document.</p></div>
+    <div class="tile"><div class="ico">POWERPOINT</div><h3>Build slides</h3><p>Pull numbers from Excel into a slide; refresh a chart with the latest figures.</p></div>
   </div>
-  <div class="call imp reveal"><span class="k">It edits the real file</span><p>The add-in writes to your open workbook, not a copy. For anything that matters, work on a duplicate and <strong>double-check its changes — especially formulas and figures — before it goes near a client</strong>.</p></div>
-  <div class="call tip reveal"><span class="k">Instructions are per-app</span><p>Standing instructions you set in Excel apply to Excel only — Word and PowerPoint keep their own. Official guide: <span class="path">support.claude.com → Use Claude for Excel</span></p></div>
+  <div class="steps reveal">
+    <div class="step"><div class="badge"></div><div class="body"><h3>Check you're covered</h3><p>Needs a paid Claude plan (Pro, Max, Team or Enterprise) and modern Microsoft 365 Office — Windows, Mac, web or iPad (not Office 2016/2019 or Android). On Team/Enterprise, an admin must first approve it under <span class="path">Organisation settings → Office agents</span>.</p></div></div>
+    <div class="step"><div class="badge"></div><div class="body"><h3>Add it, then activate in each app</h3><p>In each app go to <span class="path">Home → Add-ins</span> (Mac: <span class="path">Tools → Add-ins</span>), search <strong>"Claude"</strong> and add <em>Claude by Anthropic</em>. Do it once per app — Excel, Word, PowerPoint (Outlook has its own). If IT has rolled it out, it's already there.</p></div></div>
+    <div class="step"><div class="badge"></div><div class="body"><h3>Open it, sign in, allow file access</h3><p>Claude appears in the <span class="path">Home</span> ribbon — click to open the sidebar and sign in with your Claude account. To let it move data between apps, turn on <span class="path">Let Claude work across files</span> in its settings.</p></div></div>
+    <div class="step"><div class="badge"></div><div class="body"><h3>Point it at your work</h3><p>With the file open, just ask — <em>"check the totals on the Summary tab"</em> or <em>"build three slides from this model"</em>. It reads and edits whatever's open.</p></div></div>
+  </div>
+  <div class="call imp reveal"><span class="k">It only sees open files — and edits them live</span><p>Claude can only work with files you have <strong>open</strong>; it can't create, open or close files itself. And it writes to the live document, not a copy. Work on a duplicate for anything that matters and <strong>check its changes — especially formulas and figures — before it goes near a client</strong>.</p></div>
+  <div class="call tip reveal"><span class="k">Good to know</span><p>Instructions are per-app (Excel's don't carry to Word), and cross-app chat isn't saved between sessions. Official guide: <span class="path">support.claude.com → Work across Microsoft 365 apps</span></p></div>
 `},
 
 { navTitle:"Getting good answers", num:"10", html:`
