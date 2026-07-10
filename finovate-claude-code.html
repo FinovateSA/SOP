@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Code — Finovate</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2222%22%20fill%3D%22%230a0d12%22%2F%3E%3Ctext%20x%3D%2216%22%20y%3D%2264%22%20font-family%3D%22monospace%22%20font-size%3D%2244%22%20font-weight%3D%22700%22%20fill%3D%22%23ff8a4c%22%3E%26gt%3B_%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0d12; --bg2:#0f141b; --term:#0c1119; --panel:#11171f;
+    --line:#1d2530; --line2:#2a3441;
+    --txt:#cbd5e1; --dim:#66727f; --white:#f4f7fb;
+    --orange:#ff8a4c; --orange-deep:#f26d2b; --amber:#ffb454;
+    --green:#3fb950; --cyan:#56b6c2; --purple:#c792ea; --red:#ff6b6b;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"JetBrains Mono",ui-monospace,"Cascadia Code",Consolas,monospace;
+    background:
+      radial-gradient(720px 420px at 82% -6%,rgba(255,138,76,.13),transparent 60%),
+      radial-gradient(600px 400px at 0% 8%,rgba(86,182,194,.06),transparent 55%),
+      var(--bg);
+    color:var(--txt);line-height:1.6;-webkit-font-smoothing:antialiased;
+    min-height:100vh;overflow-x:hidden;
+  }
+  /* faint grid */
+  body::before{
+    content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.5;
+    background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);
+    background-size:44px 44px;
+    -webkit-mask-image:radial-gradient(circle at 50% 30%,#000,transparent 80%);mask-image:radial-gradient(circle at 50% 30%,#000,transparent 80%);
+  }
+  .wrap{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:26px 24px 90px}
+
+  /* top system bar */
+  .sys{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--dim);border:1px solid var(--line);border-radius:9px;padding:8px 13px;background:rgba(15,20,27,.6);margin-bottom:44px}
+  .sys .l{color:var(--orange)}
+  .sys a{color:var(--dim);text-decoration:none;transition:.15s}
+  .sys a:hover{color:var(--white)}
+
+  /* hero */
+  .eyebrow{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--orange);margin-bottom:16px;display:flex;align-items:center;gap:10px}
+  .blip{width:8px;height:8px;border-radius:50%;background:var(--orange);box-shadow:0 0 12px var(--orange);animation:pulse 1.6s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+  h1{font-size:clamp(42px,9vw,88px);font-weight:800;line-height:.98;letter-spacing:-2px;color:var(--white);margin-bottom:18px}
+  h1 .amp{color:var(--orange)}
+  .tagline{font-size:clamp(16px,2.4vw,20px);color:var(--txt);max-width:620px;margin-bottom:12px}
+  .tagline b{color:var(--white);font-weight:700}
+  .warn{display:inline-flex;align-items:center;gap:9px;font-size:12.5px;color:var(--amber);border:1px dashed rgba(255,180,84,.4);border-radius:8px;padding:7px 13px;margin-top:22px;background:rgba(255,180,84,.05)}
+
+  /* terminal */
+  .term{margin:34px 0 8px;border:1px solid var(--line2);border-radius:13px;overflow:hidden;background:var(--term);box-shadow:0 40px 80px -40px rgba(0,0,0,.9),0 0 0 1px rgba(255,138,76,.08)}
+  .term .bar{display:flex;align-items:center;gap:8px;padding:11px 15px;background:#0e141d;border-bottom:1px solid var(--line)}
+  .dot{width:12px;height:12px;border-radius:50%}
+  .dot.r{background:#ff5f57}.dot.y{background:#febc2e}.dot.g{background:#28c840}
+  .term .bar .t{margin-left:10px;font-size:12px;color:var(--dim)}
+  .term .scr{padding:20px 20px 24px;font-size:14px;min-height:180px}
+  .term .scr p{margin:2px 0;white-space:pre-wrap;word-break:break-word}
+  .pr{color:var(--green);font-weight:700}
+  .pr.q{color:var(--orange)}
+  .cmd{color:var(--white)}
+  .ok{color:var(--green)}
+  .dim{color:var(--dim)}
+  .cur{display:inline-block;width:9px;height:17px;background:var(--orange);vertical-align:-3px;margin-left:2px;animation:blink 1s steps(1) infinite}
+  @keyframes blink{50%{opacity:0}}
+
+  /* sections */
+  section{margin-top:60px}
+  .kicker{font-size:12px;color:var(--dim);margin-bottom:8px}
+  .kicker::before{content:"// ";color:var(--orange)}
+  h2{font-size:26px;font-weight:800;color:var(--white);letter-spacing:-.5px;margin-bottom:14px}
+  p.lead{font-size:15.5px;color:var(--txt);max-width:640px}
+  p.lead + p.lead{margin-top:12px}
+  .hl{color:var(--orange);font-weight:600}
+
+  /* step list */
+  .steps{margin-top:22px;display:flex;flex-direction:column;gap:12px;counter-reset:s}
+  .stp{border:1px solid var(--line);border-radius:11px;background:var(--panel);padding:15px 17px}
+  .stp .h{display:flex;align-items:center;gap:11px;margin-bottom:6px}
+  .stp .n{counter-increment:s;flex:none;width:26px;height:26px;border-radius:7px;border:1px solid var(--orange);color:var(--orange);display:grid;place-items:center;font-size:12px;font-weight:700}
+  .stp .n::before{content:counter(s,decimal-leading-zero)}
+  .stp h3{font-size:15px;color:var(--white);font-weight:700}
+  .stp p{font-size:13.5px;color:var(--dim);padding-left:37px}
+  .stp p a{color:var(--cyan)}
+  .code{margin:9px 0 2px 37px;background:#0c1119;border:1px solid var(--line);border-radius:8px;padding:9px 13px;font-size:13px;color:var(--white);display:flex;justify-content:space-between;gap:10px;align-items:center}
+  .code .pr{margin-right:8px}
+  .code button{font-family:inherit;font-size:10px;letter-spacing:1px;text-transform:uppercase;background:none;border:1px solid var(--line2);color:var(--dim);border-radius:5px;padding:4px 9px;cursor:pointer;transition:.15s;flex:none}
+  .code button:hover{border-color:var(--orange);color:var(--orange)}
+
+  /* prompt grid */
+  .grid{margin-top:22px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .try{border:1px solid var(--line);border-radius:11px;background:var(--panel);padding:15px 16px;transition:.16s;cursor:default}
+  .try:hover{border-color:rgba(255,138,76,.5);transform:translateY(-2px);background:#141b24}
+  .try .c{font-size:13.5px;color:var(--white)}
+  .try .c .pr{color:var(--orange);font-weight:700}
+  .try .d{font-size:12px;color:var(--dim);margin-top:7px}
+
+  /* three ways */
+  .ways{margin-top:22px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .way{border:1px solid var(--line);border-radius:11px;background:var(--panel);padding:15px 16px}
+  .way .tg{font-size:10.5px;letter-spacing:1.5px;color:var(--orange);font-weight:700;margin-bottom:9px}
+  .way h3{font-size:15px;color:var(--white);font-weight:700;margin-bottom:6px}
+  .way p{font-size:12.5px;color:var(--dim)}
+
+  /* guided build chat */
+  .chat{margin-top:22px;display:flex;flex-direction:column;gap:11px}
+  .chat .you{align-self:flex-start;max-width:90%;background:#131b25;border:1px solid var(--line2);border-radius:11px;padding:11px 15px;font-size:13.5px;color:var(--white)}
+  .chat .you .pr{color:var(--orange);font-weight:700;margin-right:7px}
+  .chat .cl{align-self:flex-start;max-width:90%;font-size:13px;color:var(--dim);padding:3px 0 4px 15px;border-left:2px solid var(--line2);margin-left:8px}
+  .chat .cl b{color:var(--txt)}
+  .chat .cl::before{content:"✻ ";color:var(--orange)}
+
+  /* callout */
+  .rules{margin-top:26px;border:1px solid rgba(255,107,107,.3);border-left:3px solid var(--red);border-radius:10px;background:rgba(255,107,107,.05);padding:16px 18px}
+  .rules .k{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--red);font-weight:700;margin-bottom:7px}
+  .rules p{font-size:13.5px;color:var(--txt)}
+  .rules b{color:var(--white)}
+
+  footer{margin-top:64px;padding-top:22px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;font-size:12.5px;color:var(--dim)}
+  footer a{color:var(--orange);text-decoration:none}
+  footer a:hover{text-decoration:underline}
+
+  @media(max-width:620px){
+    .grid{grid-template-columns:1fr}
+    .ways{grid-template-columns:1fr}
+    h1{letter-spacing:-1px}
+    .stp p,.code{padding-left:0;margin-left:0}
+    .stp p{padding-left:37px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="sys">
+    <span><span class="l">●</span> finovate://sop/labs/claude-code</span>
+    <span><a href="index.html">← back to SOP library</a></span>
+  </div>
+
+  <div class="eyebrow"><span class="blip"></span> Finovate Labs · not required reading</div>
+  <h1>Claude&nbsp;<span class="amp">Code</span></h1>
+  <p class="tagline">You've used Claude in a browser tab. <b>This is Claude with its sleeves rolled up</b> — living in a terminal on your own machine, able to read files, write them, and actually <i>do</i> the thing instead of telling you how.</p>
+  <p class="tagline dim" style="color:var(--dim)">Looks intimidating. Isn't. Keep reading if you're curious.</p>
+  <div class="warn">⚠ warning: mildly addictive. you may start automating things for fun.</div>
+
+  <div class="term">
+    <div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="t">terminal — finovate</span></div>
+    <div class="scr">
+      <p><span class="pr">$</span> <span class="cmd">npm install -g @anthropic-ai/claude-code</span></p>
+      <p class="ok">✔ installed claude-code in 3.1s</p>
+      <p><span class="pr">$</span> <span class="cmd">claude</span></p>
+      <p class="dim">✻ welcome to claude code — what should we build?</p>
+      <p><span class="pr q">&gt;</span> <span class="cmd" id="type"></span><span class="cur"></span></p>
+    </div>
+  </div>
+
+  <section>
+    <div class="kicker">what even is this</div>
+    <h2>Claude, off the leash</h2>
+    <p class="lead">The Claude you know answers questions. <span class="hl">Claude Code</span> does the work. Point it at a folder and it can read what's there, create and edit files, run commands, fix its own mistakes, and keep going until the job's done — all from a chat in your terminal.</p>
+    <p class="lead">Think of it as a very fast junior who happens to know every language, never gets bored, and asks before doing anything scary.</p>
+  </section>
+
+  <section>
+    <div class="kicker">the honest bit</div>
+    <h2>Do I need to be a developer?</h2>
+    <p class="lead"><span class="hl">No.</span> You talk to it in plain English. It writes the code. Plenty of people who've never written a line use it to wrangle files, build little tools, and automate boring jobs. If you can describe what you want, you can drive it.</p>
+  </section>
+
+  <section>
+    <div class="kicker">same brain, three doors</div>
+    <h2>CLI, editor, or desktop?</h2>
+    <p class="lead">It's the <span class="hl">same Claude Code underneath</span> — same abilities, same model. All that changes is where you sit and how much hand-holding you get.</p>
+    <div class="ways">
+      <div class="way">
+        <div class="tg">TERMINAL · CLI</div>
+        <h3>The raw one</h3>
+        <p>Run <b>claude</b> in a terminal. Most flexible, and where the power lives — scripting, automation, running things headless. This is the playground for writing lekker scripts.</p>
+      </div>
+      <div class="way">
+        <div class="tg">CODE EDITOR</div>
+        <h3>The comfy one</h3>
+        <p>The VS Code or JetBrains extension. Same engine, but you see edits as inline diffs and it knows the file you're looking at. Best if you live in an editor.</p>
+      </div>
+      <div class="way">
+        <div class="tg">DESKTOP APP</div>
+        <h3>The friendly one</h3>
+        <p>Claude Code inside the desktop app — buttons instead of keystrokes, visual previews, gentle prompts. The softest landing (you're probably reading this in it).</p>
+      </div>
+    </div>
+    <p class="lead" style="margin-top:16px">So your hunch is right: <span class="hl">start on a friendly surface, drop to the CLI when you want to automate and experiment.</span></p>
+  </section>
+
+  <section>
+    <div class="kicker">get it running · ~5 min</div>
+    <h2>From zero to first build</h2>
+    <div class="steps">
+      <div class="stp">
+        <div class="h"><span class="n"></span><h3>Install Node.js</h3></div>
+        <p>Claude Code runs on Node. Grab the <b>LTS</b> button from <a href="https://nodejs.org">nodejs.org</a> and click through. (No Python needed.)</p>
+      </div>
+      <div class="stp">
+        <div class="h"><span class="n"></span><h3>Install Claude Code</h3></div>
+        <p>Open a terminal (on Windows: <b>PowerShell</b>) and run:</p>
+        <div class="code"><span><span class="pr">$</span> npm install -g @anthropic-ai/claude-code</span><button onclick="cp(this)">copy</button></div>
+      </div>
+      <div class="stp">
+        <div class="h"><span class="n"></span><h3>Launch &amp; sign in</h3></div>
+        <p>Type <b>claude</b> and it opens your browser to log in with your normal Finovate Claude account.</p>
+        <div class="code"><span><span class="pr">$</span> claude</span><button onclick="cp(this)">copy</button></div>
+      </div>
+      <div class="stp">
+        <div class="h"><span class="n"></span><h3>Point it at a folder &amp; talk</h3></div>
+        <p>Move into a folder (ideally an empty playground one), start Claude, and just say what you want.</p>
+        <div class="code"><span><span class="pr">$</span> cd ~/Desktop/playground &amp;&amp; claude</span><button onclick="cp(this)">copy</button></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="kicker">things to actually try</div>
+    <h2>Fun first missions</h2>
+    <p class="lead">Copy one into Claude Code and watch it go. Start silly — that's the point.</p>
+    <div class="grid">
+      <div class="try"><div class="c"><span class="pr">&gt;</span> build a snake game I can play in my browser</div><div class="d">A working game in one file, in ~30 seconds.</div></div>
+      <div class="try"><div class="c"><span class="pr">&gt;</span> rename every file in this folder to a tidy format</div><div class="d">Bulk file wrangling without the fiddling.</div></div>
+      <div class="try"><div class="c"><span class="pr">&gt;</span> turn this messy CSV into a chart I can screenshot</div><div class="d">Data in, picture out.</div></div>
+      <div class="try"><div class="c"><span class="pr">&gt;</span> make a little webpage for our team offsite</div><div class="d">Design + build, no template hunting.</div></div>
+      <div class="try"><div class="c"><span class="pr">&gt;</span> explain what this scary spreadsheet formula does</div><div class="d">Paste it, get plain English back.</div></div>
+      <div class="try"><div class="c"><span class="pr">&gt;</span> organise my Downloads folder into subfolders</div><div class="d">The chore you've avoided for two years.</div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="kicker">a proper example · follow along</div>
+    <h2>Guided build: your own start page</h2>
+    <p class="lead">One real mini-project, start to finish, so you can see how a session actually flows. The whole trick: <span class="hl">don't ask for everything at once — build it up, one line at a time.</span></p>
+    <div class="chat">
+      <div class="you"><span class="pr">&gt;</span> build me a personal start page — a big clock and a greeting that changes with the time of day</div>
+      <div class="cl">Creates <b>index.html</b>, writes the HTML, CSS and JavaScript, opens a live preview. You've got a ticking clock in about 20 seconds.</div>
+      <div class="you"><span class="pr">&gt;</span> nice. add a row of quick links to the sites I use most</div>
+      <div class="cl">Adds a link bar and asks which sites you want — you tell it, it fills them in.</div>
+      <div class="you"><span class="pr">&gt;</span> make it dark, with a slow animated gradient behind everything</div>
+      <div class="cl">Restyles the page and shows you the change before saving it.</div>
+      <div class="you"><span class="pr">&gt;</span> add a box with a random quote each load, then tell me how to set this as my browser homepage</div>
+      <div class="cl">Done — then walks you through the browser setting. You now open your own page every morning.</div>
+    </div>
+    <p class="lead" style="margin-top:16px">That's the entire game: <b>describe → look → refine</b>. Same loop whether you're building a toy or automating a real chore.</p>
+  </section>
+
+  <section>
+    <div class="kicker">before you get carried away</div>
+    <h2>The rules still apply</h2>
+    <div class="rules">
+      <div class="k">read this once</div>
+      <p>Claude Code runs on your <b>actual machine</b> and can read, write and run things. So: keep it to your <b>own files and sandbox projects</b> — not live client folders — and <b>read what it proposes before you approve it</b>. Same data-care rules as the rest of this guide. Treat it like power tools: brilliant, and worth respecting.</p>
+    </div>
+  </section>
+
+  <footer>
+    <span>finovate labs · claude code · v0.1 (draft)</span>
+    <span><a href="index.html">← back to the SOP library</a></span>
+  </footer>
+
+</div>
+
+<script>
+  // typewriter in the hero terminal
+  const phrases = [
+    "build me a snake game",
+    "clean up my Downloads folder",
+    "make a webpage for the team offsite",
+    "turn this CSV into a chart",
+    "explain this spreadsheet formula"
+  ];
+  const el = document.getElementById('type');
+  let p = 0, c = 0, deleting = false;
+  function tick(){
+    const word = phrases[p];
+    c += deleting ? -1 : 1;
+    el.textContent = word.slice(0, c);
+    let wait = deleting ? 35 : 70;
+    if(!deleting && c === word.length){ wait = 1600; deleting = true; }
+    else if(deleting && c === 0){ deleting = false; p = (p+1) % phrases.length; wait = 350; }
+    setTimeout(tick, wait);
+  }
+  tick();
+
+  // copy buttons
+  function cp(btn){
+    const t = btn.parentElement.querySelector('span').innerText.replace(/^\$\s*/,'');
+    navigator.clipboard.writeText(t).then(()=>{
+      const o = btn.textContent; btn.textContent = 'copied'; btn.style.color = 'var(--green)';
+      setTimeout(()=>{ btn.textContent = o; btn.style.color=''; }, 1300);
+    });
+  }
+</script>
+</body>
+</html>
