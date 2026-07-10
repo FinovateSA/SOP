@@ -32,7 +32,14 @@ Publishing is automatic: **commit to `main` → GitHub Pages redeploys in ~1–2
 2. Commit and push to `main`.
 3. Wait ~1–2 min, then refresh the live URL.
 
-**Adding a new SOP?** Give it a clean, lowercase, hyphenated filename (e.g. `finovate-claude-security.html`) and add a matching card to `index.html` so it shows on the landing page.
+**Adding a new SOP?** Start from the template and follow the spec:
+
+- **`_meta/sop-template.html`** — a ready-to-copy starter with the shared styling and card engine already wired up. Copy it, rename it, and replace the `chapters` array.
+- **`_meta/STYLE-GUIDE.md`** — the full design spec: brand tokens, component cheat-sheet, and house rules for tone and structure.
+
+Give it a clean, lowercase, hyphenated filename (e.g. `finovate-claude-security.html`) and add a matching card to `index.html` so it shows on the landing page.
+
+> The `_meta/` folder is authoring context only — the leading underscore keeps it out of the published site (GitHub Pages / Jekyll ignores underscore-prefixed folders).
 
 ## ⚙️ How it's hosted
 
