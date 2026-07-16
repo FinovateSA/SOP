@@ -233,7 +233,7 @@
   <div class="main">
     <div class="topbar">
       <div class="progress-track"><div class="progress-fill" id="fill"></div></div>
-      <div class="counter" id="counter">01 / 14</div>
+      <div class="counter" id="counter">01 / 15</div>
     </div>
 
     <div class="stage" id="stage">
@@ -437,14 +437,30 @@ const chapters = [
 { navTitle:"Getting good answers", num:"10", html:`
   <div class="eyebrow reveal">Section 10 · Prompting</div>
   <h1 class="reveal">Getting good answers</h1>
-  <p class="lead reveal">The quality of what comes out tracks the quality of what goes in. A few habits do most of the work.</p>
+  <p class="lead reveal">The quality of what comes out tracks the quality of what goes in. Think of Claude as a <strong>brilliant new hire</strong> who doesn't know Finovate yet — the more precisely you brief it, the better the work.</p>
   <div class="steps reveal">
-    <div class="step"><div class="badge"></div><div class="body"><h3>Say who it's for and why</h3><p>"Draft a note to a client's FD explaining a variance" beats "explain this variance." Audience and purpose shape the whole answer.</p></div></div>
-    <div class="step"><div class="badge"></div><div class="body"><h3>Give an example of "good"</h3><p>Paste a prior deliverable you liked. Claude matches format and tone far better from a sample than from adjectives.</p></div></div>
+    <div class="step"><div class="badge"></div><div class="body"><h3>Say who it's for and why</h3><p>"Draft a note to a client's FD explaining a variance" beats "explain this variance." Audience and purpose shape the whole answer — and explaining <em>why</em> a constraint matters ("keep it under a page, the FD skims") gets it followed far more reliably than the bare rule.</p></div></div>
+    <div class="step"><div class="badge"></div><div class="body"><h3>Be specific about the output</h3><p>Format, length, structure, what "done" looks like. Vague in, vague out. If you want it to go beyond the basics, say so — it won't assume.</p></div></div>
+    <div class="step"><div class="badge"></div><div class="body"><h3>Give an example of "good"</h3><p>Paste a prior deliverable you liked. Claude matches format and tone far better from a sample than from adjectives. For a repeat task, two or three varied examples beat one.</p></div></div>
+    <div class="step"><div class="badge"></div><div class="body"><h3>Give it a role</h3><p>One sentence up front — "You are an experienced SA accountant reviewing a junior's file" — sharpens tone, judgement and what it chooses to flag.</p></div></div>
     <div class="step"><div class="badge"></div><div class="body"><h3>Ask it to think first on hard tasks</h3><p>"Work through the logic step by step before giving the answer" measurably improves reasoning-heavy work.</p></div></div>
     <div class="step"><div class="badge"></div><div class="body"><h3>Iterate — don't restart</h3><p>Correct it in the same chat: "good, but tighten the second paragraph and drop the jargon." It keeps the context.</p></div></div>
   </div>
-  <div class="call tip reveal"><span class="k">Deeper guidance</span><p>Anthropic's prompting docs are genuinely good: <span class="path">docs.claude.com/en/docs/build-with-claude/prompt-engineering</span></p></div>
+  <div class="call tip reveal"><span class="k">The colleague test</span><p>Anthropic's golden rule: show your prompt to a colleague with no context and ask if they could follow it. If they'd be confused, Claude will be too.</p></div>
+`},
+
+{ navTitle:"Prompting pro moves", num:"10·B", html:`
+  <div class="eyebrow reveal">Section 10 · Prompting</div>
+  <h1 class="reveal">Long documents &amp; <em>pro</em> moves</h1>
+  <p class="lead reveal">A few techniques from Anthropic's own playbook. They matter most when you're pasting in big documents, or writing a prompt you'll reuse.</p>
+  <div class="steps reveal">
+    <div class="step"><div class="badge"></div><div class="body"><h3>Document first, question last</h3><p>Pasting a long report or ledger extract? Put the content at the <strong>top</strong> and your instructions at the <strong>bottom</strong>. On long inputs, Anthropic's testing shows this alone can improve answers by up to 30%.</p></div></div>
+    <div class="step"><div class="badge"></div><div class="body"><h3>Ask for quotes before conclusions</h3><p>"First pull out the passages relevant to X, then answer based on those." Forcing it to quote the document first keeps the answer grounded in what's actually there.</p></div></div>
+    <div class="step"><div class="badge"></div><div class="body"><h3>Label what you paste</h3><p>When a prompt mixes instructions, background and pasted content, separate them with simple headings — "INSTRUCTIONS:", "CLIENT EMAIL:", "TRIAL BALANCE:" — so nothing blurs together.</p></div></div>
+    <div class="step"><div class="badge"></div><div class="body"><h3>Say what to do, not what not to do</h3><p>"Write in flowing paragraphs" works better than "don't use bullet points." Positive instructions steer; prohibitions get forgotten.</p></div></div>
+    <div class="step"><div class="badge"></div><div class="body"><h3>Ask it to check its own work</h3><p>End with "before you finish, verify your answer against [the totals / the source document / the brief]." It catches its own errors reliably — especially with numbers.</p></div></div>
+  </div>
+  <div class="call tip reveal"><span class="k">Straight from the source</span><p>These two cards distil Anthropic's official guide — worth a read in full: <span class="path">platform.claude.com/docs → Prompt engineering → Prompting best practices</span></p></div>
 `},
 
 { navTitle:"You're set", num:"11", html:`
@@ -459,7 +475,7 @@ const chapters = [
         <tr><td><strong>Default work</strong></td><td>Balanced model, in the relevant Project</td></tr>
         <tr><td><strong>A repeat task</strong></td><td>Check existing Skills first, then build</td></tr>
         <tr><td><strong>Client files</strong></td><td>M365 + guardrails file + CLIENT_FOLDER line</td></tr>
-        <tr><td><strong>Prompting help</strong></td><td>docs.claude.com prompt-engineering</td></tr>
+        <tr><td><strong>Prompting help</strong></td><td>Sections 10 &amp; 10·B, or platform.claude.com/docs</td></tr>
       </tbody>
     </table>
     <div class="call tip reveal"><span class="k">And remember</span><p>Claude gets you to the thinking faster. It doesn't replace your judgement — review everything before it leaves your hands.</p></div>
