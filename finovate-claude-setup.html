@@ -474,7 +474,7 @@ Use clear markdown headings so I can paste sections into a new project later. Pr
   <h2 class="reveal">Setup, in short</h2>
   <div class="steps reveal">
     <div class="step"><div class="badge"></div><div class="body"><h3>Install &amp; sign in</h3><p><span class="path">claude.com/download</span>, install, sign in with your Finovate account. Click the <strong>CoWork</strong> tab.</p></div></div>
-    <div class="step"><div class="badge"></div><div class="body"><h3>Enable capabilities</h3><p><span class="path">Settings → Capabilities</span>: cloud code execution &amp; file creation, network egress, package managers only. Model: Opus + Extended Thinking for complex work, Sonnet for quick jobs.</p></div></div>
+    <div class="step"><div class="badge"></div><div class="body"><h3>Enable capabilities</h3><p><span class="path">Settings → Capabilities</span>: cloud code execution &amp; file creation, network egress, package managers only. Model: top tier at higher effort for complex work, Sonnet for quick jobs.</p></div></div>
     <div class="step"><div class="badge"></div><div class="body"><h3>Set up a workspace folder</h3><p>One master folder, pointed at a specific client folder per session — not the top level.</p></div></div>
   </div>
   <div class="folder-art reveal">
@@ -504,21 +504,21 @@ AI-Workspace/<br>
     <tbody>
       <tr><td><strong>Haiku</strong><span style="color:var(--text-soft);font-size:13px">fastest, cheapest</span></td><td>Quick lookups, reformatting, simple rewrites, classifying or sorting, short summaries</td><td>A sharp junior who turns things around instantly</td></tr>
       <tr><td><strong>Sonnet</strong><span style="color:var(--text-soft);font-size:13px">the default</span></td><td>Most real work — drafting, analysis, most coding, document review, client deliverables</td><td>Your reliable senior — right for 80–90% of tasks</td></tr>
-      <tr><td><strong>Opus</strong><span style="color:var(--text-soft);font-size:13px">heaviest, slowest</span></td><td>Genuinely hard reasoning: tricky multi-file code, thorny logic, architecture decisions, anything where being wrong is expensive</td><td>The partner you call in for the hard problem</td></tr>
+      <tr><td><strong>Opus / Fable</strong><span style="color:var(--text-soft);font-size:13px">heaviest, slowest</span></td><td>Genuinely hard reasoning: tricky multi-file code, thorny logic, architecture decisions, anything where being wrong is expensive</td><td>The partner you call in for the hard problem</td></tr>
     </tbody>
   </table>
   <div class="call imp reveal"><span class="k">Rule of thumb</span><p>Start on <strong>Sonnet</strong>. Drop to <strong>Haiku</strong> for trivial, high-volume jobs. Reach for <strong>Opus</strong> only when Sonnet has actually struggled or the stakes genuinely justify it — not by default.</p></div>
 
-  <h2 class="reveal">Extended Thinking</h2>
-  <p class="reveal">A toggle that lets Claude reason step-by-step before answering. It improves hard problems — and costs more time and usage. So treat it the same way as the model choice: deliberate, not default.</p>
+  <h2 class="reveal">Effort</h2>
+  <p class="reveal">Next to the model picker there's an <strong>effort</strong> setting. Current models decide <em>when</em> to think all by themselves — effort controls <em>how hard</em>. Higher settings cost more time and usage, so treat it the same way as the model choice: deliberate, not default.</p>
   <div class="dd reveal">
-    <div class="col yes"><h4>Turn it on for</h4><ul>
+    <div class="col yes"><h4>Raise it for</h4><ul>
       <li>Multi-step logic or maths</li>
       <li>Debugging tricky code</li>
       <li>Untangling a messy reconciliation</li>
-      <li>Anything you'd want a second pass on</li>
+      <li>Anything where being wrong is expensive</li>
     </ul></div>
-    <div class="col no"><h4>Leave it off for</h4><ul>
+    <div class="col no"><h4>The default is fine for</h4><ul>
       <li>Drafting &amp; rewriting</li>
       <li>Quick questions &amp; lookups</li>
       <li>Reformatting or summarising</li>
@@ -529,7 +529,7 @@ AI-Workspace/<br>
   <h2 class="reveal">Minimise spend, maximise results</h2>
   <p class="reveal">On our plans you're limited by <strong>usage caps</strong>, not a per-token bill — so &ldquo;saving tokens&rdquo; really means not wasting your message allowance and not making Claude wade through clutter. Same habits, either way:</p>
   <div class="steps reveal">
-    <div class="step"><div class="badge"></div><div class="body"><h3>Right-size the model</h3><p>Don't run Opus + Extended Thinking on a job Sonnet does in seconds. The biggest saving is simply not over-powering simple tasks.</p></div></div>
+    <div class="step"><div class="badge"></div><div class="body"><h3>Right-size the model</h3><p>Don't run the top model at Max effort on a job Sonnet does in seconds. The biggest saving is simply not over-powering simple tasks.</p></div></div>
     <div class="step"><div class="badge"></div><div class="body"><h3>Start fresh chats</h3><p>Every message re-sends the whole conversation. A 40-message thread costs far more per reply than a clean start. New task, new chat.</p></div></div>
     <div class="step"><div class="badge"></div><div class="body"><h3>Keep context lean</h3><p>Paste the two relevant pages, not the 80-page PDF. Use Projects to hold context once rather than re-pasting it every time. Less clutter also means sharper answers.</p></div></div>
     <div class="step"><div class="badge"></div><div class="body"><h3>Ask clearly the first time</h3><p>A specific brief with the format you want avoids three rounds of &ldquo;not quite.&rdquo; Front-load the detail; save the back-and-forth.</p></div></div>
