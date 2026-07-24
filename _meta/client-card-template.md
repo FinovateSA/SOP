@@ -1,18 +1,34 @@
 # Client Card — [Client Legal Name (Pty) Ltd]
 
-Last reviewed: YYYY-MM-DD · by [name]
+Last updated: YYYY-MM-DD · by [name or Claude]
+Last reviewed: YYYY-MM-DD · by [name — humans only]
 
 <!--
-FOR CLAUDE: Read this card before doing any work for this client. It is the
-distilled, current truth about the client — trust it over older documents in
-the folder. If the "Last reviewed" date above is more than 6 months old, tell
-the user the card may be stale before relying on it.
+FOR CLAUDE — reading: Read this card before doing any work for this client.
+It is the distilled, current truth about the client — trust it over older
+documents in the folder. If "Last reviewed" above is more than 6 months old,
+tell the user the card may be stale before relying on it.
 
-FOR STAFF: Update this card whenever something material changes (new contact,
-new system, scope change), and review it at least every 6 months — year-end
-close and quarterly reviews are the natural moments. Update the date above
-every time. Keep it short: this is a briefing, not an archive. Detail lives
-in the folder; this card says where to look.
+FOR CLAUDE — updating: When asked to update this card from a meeting,
+transcript, email or other source:
+1. Append a dated entry to "Recent developments" (newest first), naming the
+   source, e.g. "2026-07-24 · meeting w/ FD: ...". One or two lines each.
+2. If the development changes a standing fact (new FD, new system, scope
+   change), also update the relevant section above — don't leave the card
+   contradicting itself.
+3. Set "Last updated" to today with "Claude" as the author. NEVER change
+   "Last reviewed" — that is a human sign-off only.
+4. Never delete or reword open matters or human-written notes without the
+   user confirming. Adding is safe; removing needs a human.
+5. Keep the card under ~2 pages: when Recent developments grows past ~10
+   entries, condense the oldest into single-line History entries.
+
+FOR STAFF: Update this card whenever something material changes, and review
+it at least every 6 months — year-end close and quarterly reviews are the
+natural moments. A review means reading the whole card, fixing anything
+stale (including Claude's entries), and updating "Last reviewed". Keep it
+short: this is a briefing, not an archive. Detail lives in the folder; this
+card says where to look.
 
 The Finovate AI Data Policy applies: no ID numbers, personal addresses,
 banking details or credentials anywhere on this card.
@@ -63,10 +79,17 @@ banking details or credentials anywhere on this card.
 ## 6 · Current state & open matters
 
 - **Status in one paragraph:** where the engagement stands right now
-- **Open matters / watch-list:** anything unresolved a colleague should know before touching this client
-- **Recent changes:** new FD, system migration, restructure — anything that makes older folder documents misleading
+- **Open matters / watch-list:** anything unresolved a colleague should know before touching this client *(removing an item needs a human — see rules above)*
 
-## 7 · Timeline notes *(optional — newest first, one line each)*
+## 7 · Recent developments *(running log — newest first)*
 
-- YYYY-MM: …
+*Dated entries from meetings, calls and correspondence. Claude appends here when asked to update the card; each entry names its source.*
+
+- YYYY-MM-DD · [source]: …
+- YYYY-MM-DD · [source]: …
+
+## 8 · History *(condensed — one line per item)*
+
+*Older developments roll down here so the log above stays short.*
+
 - YYYY-MM: …
