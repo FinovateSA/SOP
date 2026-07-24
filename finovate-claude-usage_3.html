@@ -330,8 +330,8 @@ const chapters = [
     <div class="step"><div class="badge"></div><div class="body"><h3>Start from the SharePoint folder</h3><p>The client folder should follow the standard skeleton: <span class="path">CODE - Client Legal Name</span> with numbered subfolders from <span class="path">00 Client Card</span> to <span class="path">08 Meetings</span>. If it doesn't match, flag it to Milan or Yanga before carrying on — the whole flow assumes the standard shape.</p></div></div>
     <div class="step"><div class="badge"></div><div class="body"><h3>Create the Project, named to match</h3><p>One Project per client or workstream. <strong>Name it exactly as the client folder appears in SharePoint</strong> — same spelling, same legal suffix. That one rule keeps forty Projects navigable. No "acme final v2".</p></div></div>
     <div class="step"><div class="badge"></div><div class="body"><h3>Add the guardrails file</h3><p>Drop the SharePoint guardrails markdown into the Project's files — download it from the <strong>toolkit on card 04·C</strong>. Required, not optional — it's what keeps Claude locked to this client's folder and teaches it where documents live. Identical in every Project; <strong>leave it unchanged</strong> — editing your copy drifts from everyone else's.</p></div></div>
-    <div class="step"><div class="badge"></div><div class="body"><h3>Run the setup prompt</h3><p>Open the Project's first chat, <strong>enable the Microsoft 365 connector in the composer</strong> (it's per-conversation, not automatic), and paste the setup prompt from card 04·C. Claude confirms the folder, interviews you to build the client card, and hands you the instructions block.</p></div></div>
-    <div class="step"><div class="badge"></div><div class="body"><h3>Upload the card, paste the instructions</h3><p><span class="path">client-card.md</span> goes into the Project's files next to the guardrails. The instructions block — including the <span class="path">CLIENT_FOLDER:</span> line, the only per-client difference — goes into <span class="path">Project Settings → Instructions</span>.</p></div></div>
+    <div class="step"><div class="badge"></div><div class="body"><h3>Paste the instructions</h3><p>Copy the standard block from the toolkit on card 04·C, fill in your client's folder path on the <span class="path">CLIENT_FOLDER:</span> line — the only per-client difference — and paste it into <span class="path">Project Settings → Instructions</span>.</p></div></div>
+    <div class="step"><div class="badge"></div><div class="body"><h3>Run the setup prompt</h3><p>Open the Project's first chat, <strong>enable the Microsoft 365 connector in the composer</strong> (it's per-conversation, not automatic), and paste the setup prompt from the toolkit. Claude verifies the folder, interviews you to build the client card, and hands you <span class="path">client-card.md</span> to upload into the Project's files next to the guardrails.</p></div></div>
     <div class="step"><div class="badge"></div><div class="body"><h3>Share the Project, then test the scope</h3><p>Private → invite the team. <strong>Can use</strong> for most; <strong>Can edit</strong> for whoever maintains the card (only editors can replace project files). Then run the three checks at the end of the setup prompt: card answers, wrong-client refusal, connector-off honesty.</p></div></div>
   </div>
   <div class="call imp reveal"><span class="k">Only two files belong in project files</span><p>The guardrails and the client card — that's it. <strong>Don't</strong> upload client documents (they go stale the day after you upload them; the live SharePoint copy is the truth) and <strong>don't</strong> upload templates (those belong to Skills, so the format stays current in one place). SharePoint is the filing cabinet; the Project is the briefing room.</p></div>
@@ -339,45 +339,14 @@ const chapters = [
   <div class="call imp reveal"><span class="k">Never a shared "Clients" Project</span><p>One client (or workstream) = one Project, always. A catch-all Project holding several clients breaks the folder scoping instantly — the guardrails design assumes exactly one authorised folder per Project.</p></div>
 `},
 
-{ navTitle:"Setup toolkit", num:"04·C", html:`
+{ navTitle:"Project Setup toolkit", num:"04·C", html:`
   <div class="eyebrow reveal">Section 04·C · Everything in one place</div>
-  <h1 class="reveal">The setup <em>toolkit</em></h1>
-  <p class="lead reveal">Everything you download or copy during setup, in the order you'll use it: the two files, the setup prompt, and the instructions block it produces.</p>
-  <h2 class="reveal">The two files</h2>
-  <div class="grid two reveal">
-    <div class="tile"><div class="ico">FILE 1</div><h3>Guardrails</h3><p><a href="https://finovate.sharepoint.com/:t:/r/sites/EmployeeOnboarding/Document%20Library/SOPs/Claude/MD%20Files/CLAUDE_SharePoint_Guardrails.md" style="color:var(--green-deep);text-decoration:underline;font-weight:700">CLAUDE_SharePoint_Guardrails.md</a> — upload to the Project's files at step 3, exactly as-is.</p></div>
-    <div class="tile"><div class="ico">FILE 2</div><h3>Client card template</h3><p><a href="https://finovate.sharepoint.com/:t:/r/sites/EmployeeOnboarding/Document%20Library/SOPs/Claude/MD%20Files/client-card-template.md" style="color:var(--green-deep);text-decoration:underline;font-weight:700">client-card-template.md</a> — attach in the chat when the setup prompt asks for it. Use as-is; the rules in its comment block matter.</p></div>
-  </div>
-  <h2 class="reveal">The setup prompt</h2>
-  <p class="reveal">Paste into the first chat of the new Project — guardrails already in the files, M365 connector switched on. Claude walks you through the rest.</p>
-  <div class="code reveal">
-    <div class="bar"><span>project setup prompt</span><button class="copy" onclick="cp(this)">Copy</button></div>
-    <pre>You are helping me set up this Claude Project for a Finovate client. Work through the steps below one at a time and wait for my answers. The SharePoint guardrails file should already be in this Project's files — if it isn't, stop and tell me to add it first.
-
-STEP 1 — FOLDER
-Ask me for the client's SharePoint folder: the full path or the unique "CODE - Client Name" segment. Verify it exists with a folder search and confirm the exact match with me (watch for similarly named clients). Then output the exact line for my Project Instructions:
-CLIENT_FOLDER: [confirmed full path]
-
-STEP 2 — CLIENT CARD
-Ask me to attach the client card template (EmployeeOnboarding → SOPs → Claude → MD Files → client-card-template.md). Follow its structure exactly and keep its comment block — the rules inside it matter. Interview me a few questions at a time to fill it in. Pre-fill what you can from the client folder first (start with 01 Admin &amp; Proposals) and only ask about the gaps. Set Last updated and Last reviewed to today with my name. The Finovate AI Data Policy applies: no ID numbers, personal addresses or banking details. When done, produce client-card.md for me to download and upload to this Project's files.
-
-STEP 3 — INSTRUCTIONS
-Give me one complete block to paste into Project Settings → Instructions, containing:
-- the CLIENT_FOLDER: line from step 1
-- "Before starting work, read client-card.md in the project files and treat it as the current truth about this client."
-- "When a conversation surfaces material new client information, offer an updated client-card.md for download and remind the user to replace it in project files."
-- "When someone asks to be brought up to speed, give a structured briefing: who the client is, engagement status, open matters, where things live, and the most recent developments — from the client card first, then recent folder documents."
-- one or two lines of engagement scope, if the card doesn't already cover it
-
-STEP 4 — TEST
-Once I confirm the card is uploaded and the instructions are saved, walk me through three checks:
-1. I ask something the card answers — you should answer from the card.
-2. I ask for another client's file — you must refuse and stay in the authorised folder.
-3. I start a fresh chat without the connector — you must stop and say so, not bluff.
-Then confirm the Project is ready.</pre>
-  </div>
-  <h2 class="reveal">What the instructions block looks like</h2>
-  <p class="reveal">The setup prompt's step 3 produces this for you with the path filled in. If you ever need to paste it manually, this is the standard block for <span class="path">Project Settings → Instructions</span>:</p>
+  <h1 class="reveal">Project Setup <em>toolkit</em></h1>
+  <p class="lead reveal">Everything you download or copy during setup, in the order you'll use it: the two files, the instructions block, then the setup prompt.</p>
+  <div class="call tip reveal"><span class="k">File 1 · The guardrails</span><p><a href="https://finovate.sharepoint.com/:t:/r/sites/EmployeeOnboarding/Document%20Library/SOPs/Claude/MD%20Files/CLAUDE_SharePoint_Guardrails.md" style="color:var(--green-deep);text-decoration:underline;font-weight:700">CLAUDE_SharePoint_Guardrails.md</a> — upload to the Project's files, exactly as-is.</p></div>
+  <div class="call tip reveal"><span class="k">File 2 · The client card template</span><p><a href="https://finovate.sharepoint.com/:t:/r/sites/EmployeeOnboarding/Document%20Library/SOPs/Claude/MD%20Files/client-card-template.md" style="color:var(--green-deep);text-decoration:underline;font-weight:700">client-card-template.md</a> — attach in the chat when the setup prompt asks for it. Use as-is; the rules in its comment block matter.</p></div>
+  <h2 class="reveal">The instructions block</h2>
+  <p class="reveal">Copy, fill in your client's folder path on the first line, and paste into <span class="path">Project Settings → Instructions</span>. The setup prompt below double-checks it and fills in anything missing.</p>
   <div class="code reveal">
     <div class="bar"><span>project instructions — standard block</span><button class="copy" onclick="cp(this)">Copy</button></div>
     <pre>CLIENT_FOLDER: [full SharePoint path to the client folder]
@@ -389,6 +358,29 @@ When a conversation surfaces material new client information, offer an updated c
 When someone asks to be brought up to speed, give a structured briefing: who the client is, engagement status, open matters, where things live, and the most recent developments — from the client card first, then recent folder documents.
 
 Engagement scope: [one or two lines, only if the client card doesn't already cover it]</pre>
+  </div>
+  <h2 class="reveal">The setup prompt</h2>
+  <p class="reveal">Paste into the first chat of the new Project — files uploaded, instructions saved, M365 connector switched on. Claude verifies the folder, builds the client card with you, and runs the checks.</p>
+  <div class="code reveal">
+    <div class="bar"><span>project setup prompt</span><button class="copy" onclick="cp(this)">Copy</button></div>
+    <pre>You are helping me set up this Claude Project for a Finovate client. Work through the steps below one at a time and wait for my answers. The SharePoint guardrails file should already be in this Project's files — if it isn't, stop and tell me to add it first.
+
+STEP 1 — FOLDER
+Check the Project Instructions for a CLIENT_FOLDER: line. If it's there, verify the folder exists with a folder search and confirm the exact match with me (watch for similarly named clients). If it's missing, ask me for the client's SharePoint folder — the full path or the unique "CODE - Client Name" segment — verify it, then output the exact line for me to paste into Project Settings → Instructions:
+CLIENT_FOLDER: [confirmed full path]
+
+STEP 2 — CLIENT CARD
+Ask me to attach the client card template (EmployeeOnboarding → SOPs → Claude → MD Files → client-card-template.md). Follow its structure exactly and keep its comment block — the rules inside it matter. Interview me a few questions at a time to fill it in. Pre-fill what you can from the client folder first (start with 01 Admin &amp; Proposals) and only ask about the gaps. Set Last updated and Last reviewed to today with my name. The Finovate AI Data Policy applies: no ID numbers, personal addresses or banking details. When done, produce client-card.md for me to download and upload to this Project's files.
+
+STEP 3 — INSTRUCTIONS
+Check that my Project Instructions contain the standard lines: read the client card before working; offer an updated client-card.md when new client information surfaces; give a structured briefing when someone asks to be brought up to speed. Output any missing lines for me to paste, plus one or two lines of engagement scope if the card doesn't already cover it.
+
+STEP 4 — TEST
+Once I confirm the card is uploaded and the instructions are saved, walk me through three checks:
+1. I ask something the card answers — you should answer from the card.
+2. I ask for another client's file — you must refuse and stay in the authorised folder.
+3. I start a fresh chat without the connector — you must stop and say so, not bluff.
+Then confirm the Project is ready.</pre>
   </div>
   <div class="call imp reveal"><span class="k">The client card, in one paragraph</span><p>A one-page briefing — who the client is, engagement status, open matters — that Claude reads at the start of every chat in the Project. It carries two dates: <strong>Last updated</strong> moves whenever content changes (Claude may bump it); <strong>Last reviewed</strong> is a human sign-off, every 6 months, humans only. Claude can't edit project files itself — it offers a replacement card and a human re-uploads it. Adding is safe; <strong>removing needs a human</strong>.</p></div>
   <div class="call note reveal"><span class="k">Starting any chat after setup</span><p>Day-to-day chats need <strong>no special prompt</strong> — the Project instructions make Claude read the client card automatically. Just switch on the M365 connector in the composer and ask for what you need. Two openers worth knowing: <em>"Get me up to speed on this client"</em> gives you the structured briefing (perfect when you're new to the client or coming back after a while), and <em>"update the client card — we've just had a meeting"</em> gets Claude to draft the refreshed card for you to re-upload.</p></div>
