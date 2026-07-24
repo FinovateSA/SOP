@@ -10,7 +10,7 @@ Everything needed to build a new SOP that matches the existing set. If you're an
 
 Each SOP is **one self-contained HTML file** (all CSS + JS inline, no external files except Google Fonts). It renders as a **single-page "card deck"**:
 
-- a fixed **navy sidebar** (brand, subtitle, auto-generated nav, owners footer);
+- a fixed **navy sidebar** (brand, subtitle, auto-generated nav, **← All SOPs button**, owners footer);
 - a **main stage** showing one "chapter" (card) at a time;
 - a **top progress bar + counter**, and **Back / Next** buttons;
 - **← / →** arrow keys move between cards.
@@ -74,6 +74,7 @@ All of these are demonstrated live in `sop-template.html`. Drop them inside a ca
 | **Keyboard key** | `<span class="kbd">Ctrl</span>` | small key cap |
 | **Hero cover** | `<div class="cover hero">…</div>` | navy gradient card; use for the opening + closing cards. Inside it, add `<div class="meta"><div>Owner<b>…</b></div>…</div>` and a `<button class="cta" onclick="go(1)">Start →</button>` |
 | **Screenshot slot** | `<div class="shot"><div class="cam">📷</div><div class="lbl">Caption</div></div>` | dashed placeholder; swap to `<div class="shot filled"><img src="…"></div>` when you have the image |
+| **Back to menu** | `<a class="rail-home" href="index.html">← All SOPs</a>` | **required in every SOP** — sits in the sidebar between the nav and the owners footer, with the `.rail-home` CSS rules. The template has it; don't remove it |
 
 ---
 

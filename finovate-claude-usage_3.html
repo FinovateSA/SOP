@@ -59,6 +59,8 @@
   .nav-item.active{background:var(--green);color:var(--navy);font-weight:700}
   .nav-item.active .num{color:var(--navy)}
   .nav-item.done .num::before{content:"✓ ";color:var(--green)}
+  .rail-home{display:block;margin-top:14px;padding:10px 12px;border:1px solid rgba(255,255,255,.18);border-radius:9px;color:rgba(255,255,255,.75);font-size:12.5px;font-weight:600;text-decoration:none;text-align:center;transition:border-color .2s,color .2s}
+  .rail-home:hover{border-color:var(--green);color:var(--green)}
   .rail-foot{font-size:9.5px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.45);font-weight:600;padding-top:18px;border-top:1px solid rgba(255,255,255,.12);margin-top:10px}
 
   /* ---------- main ---------- */
@@ -226,6 +228,7 @@
     <div class="brand"><div class="tag">Using Claude · v1</div></div>
     <div class="rail-sub">The companion to Staff Setup. How to actually get work out of Claude.</div>
     <nav id="nav"></nav>
+    <a class="rail-home" href="index.html">← All SOPs</a>
     <div class="rail-foot">Owners · Yanga &amp; Milan</div>
   </aside>
 
