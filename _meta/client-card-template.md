@@ -2,6 +2,7 @@
 
 Last updated: YYYY-MM-DD · by [name or Claude]
 Last reviewed: YYYY-MM-DD · by [name — humans only]
+Card owner: [Finovate lead — responsible for the 6-monthly review]
 
 <!--
 FOR CLAUDE — reading: Read this card before doing any work for this client.
@@ -48,10 +49,16 @@ banking details or credentials anywhere on this card.
 
 ## 2 · Engagement
 
-- **Services we provide:** e.g. monthly management accounts · AFS · tax compliance · payroll · advisory
 - **Explicitly out of scope:**
-- **Engagement letter:** date + file name in this folder
+- **Engagement letter:** date + file name in `01 Admin & Proposals`
+- **Accepted proposal (operative):** file name in `01 Admin & Proposals`
 - **Billing arrangement:** retainer / fixed / hourly
+
+| Service line | Status | Next deadline | Finovate owner |
+|---|---|---|---|
+| e.g. Accounting — monthly mgmt accounts | | | |
+| e.g. Tax compliance | | | |
+| e.g. Payroll | | | |
 
 ## 3 · Key people
 
