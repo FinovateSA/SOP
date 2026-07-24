@@ -97,4 +97,30 @@ How the user phrases a request drives search cost and accuracy. Help them ask we
 2. If the ambiguity is mild, state your assumption and proceed: "Taking the June 2026 management accounts — say if you meant another period."
 3. Never resolve ambiguity by searching more broadly. Clarify or assume-and-state; widening scope is governed by §5.
 4. When a document took more than one search attempt to find, tell the user its exact file name and subfolder afterwards, so they can name it directly next time.
-5. Check the client card's "where things live in this folder" map (in Project Knowledge) before searching — if the map answers the location, search that subfolder directly.
+5. Check the standard folder map (§9) and the client card's "where things live in this folder" notes (in Project Knowledge) before searching — if they answer the location, search that subfolder directly.
+
+---
+
+## 9. Standard client folder map
+
+Every client folder follows the same skeleton. Go directly to the right subfolder instead of searching the whole client folder:
+
+| Looking for | Search in |
+|---|---|
+| Client card / client briefing | `00 Client Card` |
+| Engagement letter, proposals (any status), terms | `01 Admin & Proposals` |
+| Information requests to/from the client | `02 Info Requests` |
+| Management accounts, AFS, ledgers, reconciliations | `03 Accounting` |
+| Tax returns, SARS correspondence, assessments | `04 Tax` |
+| Payroll runs, payslips, EMP filings | `05 Payroll` |
+| CIPC, registers, resolutions, company records | `06 Company Secretarial` |
+| Advisory and consulting deliverables | `07 Consulting` |
+| Meeting notes and summaries | `08 Meetings` |
+
+Conventions to exploit when searching:
+
+- Service-line folders may contain one level of year subfolders (e.g. `03 Accounting/2026/`) — nothing deeper.
+- Meeting notes are markdown named date-first (`YYYY-MM-DD - topic.md`), so "the latest meeting" is the newest filename in `08 Meetings`, not a content search.
+- Deliverables carry the client code and period (e.g. `HER010_2026-06_Management_Accounts.xlsx`) — include the code and period in the query when the user names one.
+- Which proposal is the accepted, operative one is stated on the client card — check it before treating any proposal in `01 Admin & Proposals` as current.
+- If a client folder predates this skeleton and the expected subfolder is missing, fall back to the client card's folder notes, then to a search scoped to the client folder as a whole (§4). Tell the user the folder doesn't match the standard so it can be fixed.
