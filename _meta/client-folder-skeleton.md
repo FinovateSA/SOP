@@ -5,7 +5,7 @@ same names in the potential-client flow so folders convert seamlessly on win).
 
 ```
 [CODE] - [Client Legal Name (Pty) Ltd]/     e.g. HER010 - Hermanus Trading And Logistics (Pty) Ltd
-  00 Client Card/            client-card.md lives here once it moves out of Project files
+  00 Client Card/            client-card.md — the standing briefing Claude reads first, every chat
   01 Admin & Proposals/      engagement letter + all proposals (draft, sent, accepted, declined)
   02 Info Requests/
   03 Accounting/

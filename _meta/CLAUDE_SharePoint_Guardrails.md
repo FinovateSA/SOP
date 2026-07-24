@@ -15,9 +15,9 @@ The SharePoint connector must be enabled for the conversation for any of the ret
 
 ## 1. Source-of-truth hierarchy
 
-Project Knowledge (this Project's uploaded MD and reference files) is the **primary and first** source for all client questions.
+The **client card** — `00 Client Card/client-card.md` in the authorised client folder — is the primary briefing for all client questions. Read it at the start of every conversation and treat it as the current truth about the client; trust it over older documents elsewhere in the folder. If SharePoint is unreachable (connector not enabled), stop and tell the user — do not work on client matters without the card.
 
-The Fin_Adv SharePoint site is the underlying raw-document repository, used only for supplementary retrieval, verifying document currency, or sourcing material not yet processed into Project Knowledge.
+Project Knowledge holds this guardrails file, plus any reference files the team has deliberately promoted (§6). The rest of the Fin_Adv SharePoint client folder is the underlying raw-document repository, used for supplementary retrieval, verifying document currency, or sourcing material not yet distilled into the card.
 
 ---
 
@@ -97,7 +97,7 @@ How the user phrases a request drives search cost and accuracy. Help them ask we
 2. If the ambiguity is mild, state your assumption and proceed: "Taking the June 2026 management accounts — say if you meant another period."
 3. Never resolve ambiguity by searching more broadly. Clarify or assume-and-state; widening scope is governed by §5.
 4. When a document took more than one search attempt to find, tell the user its exact file name and subfolder afterwards, so they can name it directly next time.
-5. Check the standard folder map (§9) and the client card's "where things live in this folder" notes (in Project Knowledge) before searching — if they answer the location, search that subfolder directly.
+5. Check the standard folder map (§9) and the client card's "where things live in this folder" notes before searching — if they answer the location, search that subfolder directly.
 
 ---
 
