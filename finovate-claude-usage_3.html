@@ -370,6 +370,20 @@ Once I confirm the card is uploaded and the instructions are saved, walk me thro
 3. I start a fresh chat without the connector — you must stop and say so, not bluff.
 Then confirm the Project is ready.</pre>
   </div>
+  <h2 class="reveal">What the instructions block looks like</h2>
+  <p class="reveal">The setup prompt's step 3 produces this for you with the path filled in. If you ever need to paste it manually, this is the standard block for <span class="path">Project Settings → Instructions</span>:</p>
+  <div class="code reveal">
+    <div class="bar"><span>project instructions — standard block</span><button class="copy" onclick="cp(this)">Copy</button></div>
+    <pre>CLIENT_FOLDER: [full SharePoint path to the client folder]
+
+Before starting work, read client-card.md in the project files and treat it as the current truth about this client.
+
+When a conversation surfaces material new client information, offer an updated client-card.md for download and remind the user to replace it in project files.
+
+When someone asks to be brought up to speed, give a structured briefing: who the client is, engagement status, open matters, where things live, and the most recent developments — from the client card first, then recent folder documents.
+
+Engagement scope: [one or two lines, only if the client card doesn't already cover it]</pre>
+  </div>
   <div class="call imp reveal"><span class="k">The client card, in one paragraph</span><p>A one-page briefing — who the client is, engagement status, open matters — that Claude reads at the start of every chat in the Project. It carries two dates: <strong>Last updated</strong> moves whenever content changes (Claude may bump it); <strong>Last reviewed</strong> is a human sign-off, every 6 months, humans only. Claude can't edit project files itself — it offers a replacement card and a human re-uploads it. Adding is safe; <strong>removing needs a human</strong>.</p></div>
   <div class="call tip reveal"><span class="k">Get the client card template</span><p><a href="https://finovate.sharepoint.com/:t:/r/sites/EmployeeOnboarding/Document%20Library/SOPs/Claude/MD%20Files/client-card-template.md" style="color:var(--green-deep);text-decoration:underline;font-weight:700">client-card-template.md</a> — next to the guardrails file in <span class="path">EmployeeOnboarding → SOPs → Claude → MD Files</span>. Use it as-is; the rules in its comment block matter.</p></div>
   <div class="call note reveal"><span class="k">Starting any chat after setup</span><p>Day-to-day chats need <strong>no special prompt</strong> — the Project instructions make Claude read the client card automatically. Just switch on the M365 connector in the composer and ask for what you need. Two openers worth knowing: <em>"Get me up to speed on this client"</em> gives you the structured briefing (perfect when you're new to the client or coming back after a while), and <em>"update the client card — we've just had a meeting"</em> gets Claude to draft the refreshed card for you to re-upload.</p></div>
