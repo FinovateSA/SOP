@@ -9,8 +9,11 @@ It is the distilled, current truth about the client — trust it over older
 documents in the folder. If "Last reviewed" above is more than 6 months old,
 tell the user the card may be stale before relying on it.
 
-FOR CLAUDE — updating: When asked to update this card from a meeting,
-transcript, email or other source:
+FOR CLAUDE — updating: You cannot edit this card in place. To update it,
+produce the complete updated client-card.md as a downloadable file and tell
+the user to replace the copy in the Project's files (this needs "Can edit"
+access on the Project). When updating from a meeting, transcript, email or
+other source:
 1. Append a dated entry to "Recent developments" (newest first), naming the
    source, e.g. "2026-07-24 · meeting w/ FD: ...". One or two lines each.
 2. If the development changes a standing fact (new FD, new system, scope
