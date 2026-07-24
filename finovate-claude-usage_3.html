@@ -358,7 +358,7 @@ const chapters = [
     <div class="bar"><span>project instructions — standard block</span><button class="copy" onclick="cp(this)">Copy</button></div>
     <pre>CLIENT_FOLDER: [full SharePoint path to the client folder]
 
-Before starting work, read 00 Client Card/client-card.md in the client folder and treat it as the current truth about this client. If you cannot reach SharePoint, stop and tell the user to enable the Microsoft 365 connector — do not work without the card.
+Before starting work, read 00 Client Card/client-card.md in the client folder and treat it as the current truth about this client. If you cannot reach SharePoint, stop and tell the user to enable the Microsoft 365 connector — do not work without the card. If the card's Last reviewed date is more than 6 months old, tell the user it may be stale before relying on it.
 
 When a conversation surfaces a material change — engagement scope, key people, systems, billing, service-line status — offer an updated client-card.md for download and remind the user to replace the copy in 00 Client Card. Routine small developments do not need a card update.
 
@@ -380,7 +380,7 @@ STEP 2 — CLIENT CARD
 Ask me to attach the client card template (EmployeeOnboarding → SOPs → Claude → MD Files → client-card-template.md). Follow its structure exactly and keep its comment block — the rules inside it matter. Interview me a few questions at a time to fill it in. Pre-fill what you can from the client folder first (start with 01 Admin &amp; Proposals) and only ask about the gaps. Set Last updated and Last reviewed to today with my name. The Finovate AI Data Policy applies: no ID numbers, personal addresses or banking details. When done, produce client-card.md for me to download and save into the 00 Client Card subfolder of the client's SharePoint folder, replacing any existing copy.
 
 STEP 3 — INSTRUCTIONS
-Check that my Project Instructions contain the standard lines: read the client card from 00 Client Card before working (and stop if SharePoint is unreachable); offer an updated client-card.md when something material changes; give a structured briefing when someone asks to be brought up to speed. Output any missing lines for me to paste, plus one or two lines of engagement scope if the card doesn't already cover it.
+Check that my Project Instructions contain the standard lines: read the client card from 00 Client Card before working (stop if SharePoint is unreachable, and flag the card if Last reviewed is older than 6 months); offer an updated client-card.md when something material changes; give a structured briefing when someone asks to be brought up to speed. Output any missing lines for me to paste, plus one or two lines of engagement scope if the card doesn't already cover it.
 
 STEP 4 — TEST
 Once I confirm the card is uploaded and the instructions are saved, walk me through three checks:
