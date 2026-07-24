@@ -74,7 +74,7 @@ All of these are demonstrated live in `sop-template.html`. Drop them inside a ca
 | **Keyboard key** | `<span class="kbd">Ctrl</span>` | small key cap |
 | **Hero cover** | `<div class="cover hero">…</div>` | navy gradient card; use for the opening + closing cards. Inside it, add `<div class="meta"><div>Owner<b>…</b></div>…</div>` and a `<button class="cta" onclick="go(1)">Start →</button>` |
 | **Screenshot slot** | `<div class="shot"><div class="cam">📷</div><div class="lbl">Caption</div></div>` | dashed placeholder; swap to `<div class="shot filled"><img src="…"></div>` when you have the image |
-| **Back to menu** | `<a class="rail-home" href="index.html">← All SOPs</a>` | **required in every SOP** — sits in the sidebar between the nav and the owners footer, with the `.rail-home` CSS rules. The template has it; don't remove it |
+| **Back to menu** | `<a class="rail-home" href="index.html">← All SOPs</a>` | **required in every SOP** — sits in the sidebar between the nav and the owners footer, with the `.rail-home` CSS rules. Its twin `<a class="top-home">` sits first in the `.topbar` and only shows under 880px, where the sidebar is hidden. The template has both; don't remove them |
 
 ---
 
