@@ -66,6 +66,8 @@
   /* ---------- main ---------- */
   .main{display:flex;flex-direction:column;overflow:hidden;position:relative}
   .topbar{display:flex;align-items:center;gap:18px;padding:18px 46px;border-bottom:1px solid var(--line);background:rgba(244,246,250,.88);backdrop-filter:blur(8px);z-index:5}
+  .top-home{display:none;font-size:12px;font-weight:700;color:var(--navy-soft);text-decoration:none;white-space:nowrap}
+  .top-home:hover{color:var(--green-deep)}
   .progress-track{flex:1;height:3px;background:var(--line);border-radius:99px;overflow:hidden}
   .progress-fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .5s cubic-bezier(.6,.02,.1,1)}
   .counter{font-size:12px;font-weight:600;color:var(--navy-soft);letter-spacing:1px;white-space:nowrap}
@@ -214,6 +216,7 @@
     .cover.hero{margin:-40px -22px 0;padding:48px 22px 40px}
     .grid.three,.grid.two,.dd{grid-template-columns:1fr}
     .topbar{padding:14px 22px}
+    .top-home{display:inline-block}
     .footnav{padding:16px 22px}
   }
 </style>
@@ -235,6 +238,7 @@
   <!-- ============ MAIN ============ -->
   <div class="main">
     <div class="topbar">
+      <a class="top-home" href="index.html">← All SOPs</a>
       <div class="progress-track"><div class="progress-fill" id="fill"></div></div>
       <div class="counter" id="counter">01 / 16</div>
     </div>
