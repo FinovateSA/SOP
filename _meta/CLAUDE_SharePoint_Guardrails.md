@@ -79,7 +79,7 @@ When a SharePoint document becomes relevant to an active workstream:
 3. Save the result as a new file and **produce it for the user to upload** to Project Knowledge.
 4. Produce an **updated Project Knowledge Index file** reflecting the addition, for the user to upload.
 
-Claude cannot write back to Project Knowledge or SharePoint (connector access is read-only). Every promotion step ends with a file the user uploads manually — never assume auto-persistence.
+Claude cannot write to Project Knowledge — promotion always ends with a file the user uploads manually. SharePoint writes are possible but tightly governed by §10; never assume something is persisted unless the write visibly succeeded.
 
 ---
 
@@ -124,3 +124,15 @@ Conventions to exploit when searching:
 - Deliverables carry the client code and period (e.g. `HER010_2026-06_Management_Accounts.xlsx`) — include the code and period in the query when the user names one.
 - Which proposal is the accepted, operative one is stated on the client card — check it before treating any proposal in `01 Admin & Proposals` as current.
 - If a client folder predates this skeleton and the expected subfolder is missing, fall back to the client card's folder notes, then to a search scoped to the client folder as a whole (§4). Tell the user the folder doesn't match the standard so it can be fixed.
+
+---
+
+## 10. Write discipline
+
+The connector allows writes. Use them narrowly:
+
+1. Write only within the authorised `CLIENT_FOLDER:` — never anywhere else in SharePoint.
+2. Routine write targets are exactly two: updating `00 Client Card/client-card.md` (per the card's own update rules) and saving meeting-note markdown into `08 Meetings`. Any other write requires the user's explicit instruction in this conversation.
+3. Confirm before saving: show a short summary of what will change and write only after the user agrees. Never chain a write onto a request that didn't ask for one.
+4. Never delete files, and never overwrite any document other than the client card. Replacing the card is safe — the library keeps version history.
+5. If a write fails or is blocked, produce the file for the user to save manually and say so — never assume persistence.

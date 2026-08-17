@@ -11,10 +11,12 @@ documents in the folder. If "Last reviewed" above is more than 6 months old,
 tell the user the card may be stale before relying on it.
 
 FOR CLAUDE — updating: This card lives in the client's SharePoint folder at
-00 Client Card/client-card.md, and you cannot write to SharePoint. To update
-it, produce the complete updated client-card.md as a downloadable file and
-tell the user to replace the copy in 00 Client Card (SharePoint keeps the
-version history). Offer an update only for MATERIAL changes — engagement
+00 Client Card/client-card.md. To update it: draft the change, show the user
+a short summary of exactly what will change, and save the updated card back
+to 00 Client Card/client-card.md only after they confirm (SharePoint keeps
+the version history). If you cannot write to SharePoint, produce the updated
+client-card.md as a downloadable file for the user to save there instead.
+Offer an update only for MATERIAL changes — engagement
 scope, key people, systems, billing, the status of a service line. Routine
 day-to-day developments do not need an immediate card update; fold them in
 the next time the card is updated anyway. When updating:
