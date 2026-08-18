@@ -72,9 +72,9 @@ banking details or credentials anywhere on this card.
 | Primary client contact | | |
 | FD / financial manager | | |
 | Finovate lead | | |
-| Finovate team | | |
+| Finovate team | | one row per person — everyone who works on this client, with what they do (e.g. "monthly accounts", "payroll") |
 
-*(Names and roles only — no personal contact details on this card.)*
+*(List the **whole** Finovate team, not just the lead — this is how a colleague knows who to ask. Names and roles only — no personal contact details on this card.)*
 
 ## 4 · Systems & data
 
