@@ -231,6 +231,7 @@
     font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500;word-break:break-all}
   .pb-out.ok{color:var(--green)}
   .pb-note{margin-top:9px;font-size:12px;color:var(--text-soft);line-height:1.55}
+  #pbline.ok{color:var(--green);font-weight:700}
 
   @media(max-width:880px){
     .shell{grid-template-columns:1fr}
@@ -360,14 +361,14 @@ const chapters = [
     <div class="step"><div class="badge"></div><div class="body"><h3>Start from the SharePoint folder</h3><p>The client folder should follow the standard skeleton: <span class="path">CODE - Client Legal Name</span> with numbered subfolders from <span class="path">00 Client Card</span> to <span class="path">08 Meetings</span>. If it doesn't match, flag it to Milan or Yanga before carrying on — the whole flow assumes the standard shape.</p></div></div>
     <div class="step"><div class="badge"></div><div class="body"><h3>Create the Project, named to match</h3><p>One Project per client or workstream. <strong>Name it exactly as the client folder appears in SharePoint</strong> — same spelling, same legal suffix. That one rule keeps forty Projects navigable. No "acme final v2".</p></div></div>
     <div class="step"><div class="badge"></div><div class="body"><h3>Check the Skill is available — no files needed</h3><p><strong>Nothing gets uploaded to project files any more.</strong> The guardrails and the blank client card template now live inside the org-wide <span class="path">finovate-sharepoint-client-setup</span> Skill, so they stay current in one place. Just make sure that Skill is switched on for your account before you start; if SharePoint behaves oddly during setup, that's the first thing to check.</p></div></div>
-    <div class="step"><div class="badge"></div><div class="body"><h3>Paste the instructions</h3><p>Copy the standard block from the toolkit below and paste it into <span class="path">Project Settings → Instructions</span>. The only per-client edit is the tail of the <span class="path">CLIENT_FOLDER:</span> line — the prefix <span class="path">Fin_Adv/Documents/Clients/</span> is already there, so you only add the two subfolder names, e.g. <span class="path">A-C/CAR009</span>. Use the builder below to get them right.</p></div></div>
+    <div class="step"><div class="badge"></div><div class="body"><h3>Paste the instructions</h3><p>Copy the standard block from the toolkit below and paste it into <span class="path">Project Settings → Instructions</span>. The only per-client edit is the tail of the <span class="path">CLIENT_FOLDER:</span> line — the prefix <span class="path">Fin_Adv/Documents/Clients/</span> is already there, so you only add the two subfolder names, e.g. <span class="path">A-C/CAR009</span>. Type the client code into the builder below and it writes the finished line into the block for you.</p></div></div>
     <div class="step"><div class="badge"></div><div class="body"><h3>Run the setup prompt</h3><p>Open the Project's first chat, <strong>enable the Microsoft 365 connector in the composer</strong> (it's per-conversation, not automatic), and paste the setup prompt from the toolkit — it references the Skill by name, so Claude picks it up. Claude verifies the folder, <strong>gathers what it can from SharePoint and past chats first</strong> and shows you a drafted card rather than interviewing you from blank, and — once you approve it — <strong>saves it into the client's <span class="path">00 Client Card</span> folder in SharePoint itself</strong>.</p></div></div>
     <div class="step"><div class="badge"></div><div class="body"><h3>Share the Project, then test the scope</h3><p>Private → invite the team. <strong>Can use</strong> for most; <strong>Can edit</strong> for the owners. Then run the three checks at the end of the setup prompt: card answers, wrong-client refusal, connector-off honesty.</p></div></div>
   </div>
   <h2 class="reveal">The toolkit</h2>
   <p class="reveal">Two things to copy — the folder path and the instructions block — and one prompt to paste into the first chat. No downloads: the guardrails and the card template travel with the Skill.</p>
   <details class="tk reveal" open><summary>Folder path builder — type the client code</summary><div class="inner">
-  <p>Client folders sit in lettered buckets, so the path needs both the bucket and the code. Type the code and this builds it for you.</p>
+  <p>Client folders sit in lettered buckets, so the path needs both the bucket and the code. Type the code and this builds it — and drops it straight into the instructions block below.</p>
   <div class="pb">
     <div class="pb-row">
       <input id="pbcode" type="text" placeholder="CAR009" autocomplete="off" spellcheck="false" oninput="pb()">
@@ -377,11 +378,11 @@ const chapters = [
     <div class="pb-note" id="pbnote">Type the client code — the lettered bucket comes from its first letter.</div>
   </div>
   </div></details>
-  <details class="tk reveal" open><summary>The instructions block — copy, add the two subfolder names, paste</summary><div class="inner">
-  <p>Goes into <span class="path">Project Settings → Instructions</span>. Replace the bracketed part of the first line with the bucket and code (e.g. <span class="path">A-C/CAR009</span>) — the setup prompt double-checks it and fills in anything missing.</p>
+  <details class="tk reveal" open><summary>The instructions block — path fills in from the builder, copy, paste</summary><div class="inner">
+  <p>Goes into <span class="path">Project Settings → Instructions</span>. <strong>Type a client code in the builder above and the <span class="path">CLIENT_FOLDER:</span> line below fills in on its own</strong> — then just hit Copy. (Nothing to type here by hand; the setup prompt double-checks the line and fills in anything else missing.)</p>
   <div class="code">
     <div class="bar"><span>project instructions — standard block</span><button class="copy" onclick="cp(this)">Copy</button></div>
-    <pre>CLIENT_FOLDER: Fin_Adv/Documents/Clients/[bucket/CODE — e.g. A-C/CAR009]
+    <pre>CLIENT_FOLDER: <span id="pbline">Fin_Adv/Documents/Clients/[bucket/CODE — e.g. A-C/CAR009]</span>
 
 Before starting work, read 00 Client Card/client-card.md in the client folder and treat it as the current truth about this client. If you cannot reach SharePoint, stop and tell the user to enable the Microsoft 365 connector — do not work without the card. If the card's Last reviewed date is more than 6 months old, tell the user it may be stale before relying on it.
 
@@ -681,6 +682,7 @@ document.addEventListener('keydown',e=>{
 
 // client folder path builder (card 04·B)
 const PB_BASE='Fin_Adv/Documents/Clients/';
+const PB_PLACEHOLDER=PB_BASE+'[bucket/CODE — e.g. A-C/CAR009]';
 const PB_BUCKETS=[['A','C','A-C'],['D','H','D-H'],['I','O','I-O'],['P','R','P-R'],['S','T','S-T'],['U','Z','U-Z']];
 function pb(){
   const inp=document.getElementById('pbcode');
@@ -690,18 +692,28 @@ function pb(){
   const code=inp.value.toUpperCase().replace(/[^A-Z0-9]/g,'');
   if(!code){
     out.textContent=PB_BASE+'…'; out.classList.remove('ok');
+    pbfill(PB_PLACEHOLDER,false);
     note.textContent='Type the client code — the lettered bucket comes from its first letter.';
     return;
   }
   const bucket=PB_BUCKETS.find(b=>code[0]>=b[0]&&code[0]<=b[1]);
   if(!bucket){
     out.textContent=PB_BASE+'…'; out.classList.remove('ok');
+    pbfill(PB_PLACEHOLDER,false);
     note.textContent='A client code starts with a letter — check the code and try again.';
     return;
   }
   out.textContent=PB_BASE+bucket[2]+'/'+code;
   out.classList.add('ok');
-  note.textContent='Paste this on the CLIENT_FOLDER: line. Claude resolves it to the full \u201c'+code+' - Client Legal Name\u201d folder when it verifies the match in Step 1.';
+  pbfill(PB_BASE+bucket[2]+'/'+code,true);
+  note.textContent='Done — the instructions block below now carries this path, so you can copy it straight across. Claude resolves it to the full \u201c'+code+' - Client Legal Name\u201d folder when it verifies the match in Step 1.';
+}
+// writes the live path into the instructions block's CLIENT_FOLDER: line
+function pbfill(text,ok){
+  const line=document.getElementById('pbline');
+  if(!line)return;
+  line.textContent=text;
+  line.classList.toggle('ok',!!ok);
 }
 function pbcopy(btn){
   const out=document.getElementById('pbout');
